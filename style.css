@@ -2177,6 +2177,11 @@ a:hover {
   color: #fff;
 }
 
+.nti-badge {
+  background: #1d6500;
+  color: #fff;
+}
+
 .oracle-badge {
   background: #c74634;
   color: #fff;
