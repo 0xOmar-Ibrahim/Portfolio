@@ -7,11 +7,11 @@ var CERTIFICATES_DATA = [
   {
     id: "nti-pentest-appsec",
     title: "Penetration Testing & Application Security",
-    issuer: "NTI - Cybersecurity Superhero Academy (Undergraduate Level)",
+    issuer: "NTI",
     issuerBadge: "nti-badge",
     date: "Aug 2026",
     desc: "Completed the NTI Cybersecurity Superhero Academy specialization in Penetration Testing & Application Security, covering 60 technical hours and 12 freelance hours, delivered in partnership with Silicon 21.",
-    tag: "60 Technical Hrs",
+    tag: "60 Technical Hrs / 12 Freelance Hrs",
     fileUrl: "certs/NTI.pdf",
     highlight: true
 },{
