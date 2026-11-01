@@ -1795,7 +1795,7 @@ a:hover {
    ========================================================================== */
 .ctf-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.85rem;
 }
 
@@ -1974,6 +1974,44 @@ a:hover {
   font-size: 0.82rem;
   font-weight: 700;
   color: var(--text-primary);
+}
+
+
+.htb-badges-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+
+.htb-badge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: rgba(0, 255, 157, 0.08);
+  border: 1px solid rgba(0, 255, 157, 0.25);
+  color: #a7f3d0;
+  transition: all var(--transition-fast);
+}
+
+.htb-badge-chip:hover {
+  background: rgba(0, 255, 157, 0.18);
+  border-color: rgba(0, 255, 157, 0.55);
+  color: var(--green-cyber);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 255, 157, 0.15);
+}
+
+.htb-badge-chip i,
+.htb-badge-chip svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--green-cyber);
 }
 
 .ctf-tags {

@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typewriterElement) {
     const roles = [
       "Penetration Tester & Ethical Hacker",
+      "Hack The Box 'Skilled' Rank (Lvl 33)",
       "TryHackMe Top 7% Offensive Security",
       "Embedded Security & IoT Developer",
       "Low-Level x86-64 Assembly & C Specialist",
@@ -1014,7 +1015,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
         resLine.innerHTML = `
 <span class="cyber-cyan">OMAR IBRAHIM</span> | Penetration Tester & Ethical Hacker
 Location: Giza, Egypt | Status: Available for Security & Pentest roles
-Global Rankings: <strong>Top 8% TryHackMe</strong> &bull; <strong>#9 Global Rank Hawaii Cyber CTF (HTB)</strong> &bull; <strong>#4 Solo Rank IEEE CTF</strong>
+Global Rankings: <strong>HTB Rank 'Skilled' (Lvl 33 &bull; 14.3k XP)</strong> &bull; <strong>Top 7% TryHackMe</strong> &bull; <strong>#9 Global Rank Hawaii Cyber CTF (HTB)</strong> &bull; <strong>#4 Solo Rank IEEE CTF</strong>
 National Honors: <strong>3rd Nationally across Egypt</strong> (Embedded Systems & AI)
 Email: omarforsec@gmail.com | Phone: 01061408612 / 01144130977
 `;
@@ -1023,11 +1024,14 @@ Email: omarforsec@gmail.com | Phone: 01061408612 / 01144130977
       case 'ctf':
       case 'ctfs':
         resLine.innerHTML = `
-<span class="cyber-amber">[🏆] PWN3RX0 CTF (IEEE HITU):</span> <strong>#4 Rank Solo</strong> vs teams of 3-5 (Web, PrivEsc, Binary, Crypto)
-  PDF Certificate: pdfs/IEEE-CTF.pdf
+<span class="cyber-green">[🟩] HACK THE BOX (HTB):</span> <strong>Rank: Skilled (Level 33)</strong> &bull; 14,310 XP &bull; 753.2 XP/wk &bull; 19 Wks Active &bull; 6 Badges
+  Profile: https://app.hackthebox.com/profile/0x4FMR
+<span class="cyber-cyan">[🛡️] TRYHACKME ARENA:</span> <strong>Top 7% Worldwide</strong> across 70+ lab attack rooms
+  Profile: https://tryhackme.com/p/0x4FMR
 <span class="cyber-green">[⚡] HAWAII CYBER CTF (Hack The Box):</span> <strong>#9 Rank Global</strong> (Adversarial Infrastructure, AD, Web)
   PDF Certificate: pdfs/Hawaii-Cyber-CTF.pdf
-<span class="cyber-cyan">[🛡️] TRYHACKME ARENA:</span> <strong>Top 7% Worldwide</strong> across 70+ lab attack rooms
+<span class="cyber-amber">[🏆] PWN3RX0 CTF (IEEE HITU):</span> <strong>#4 Rank Solo</strong> vs teams of 3-5 (Web, PrivEsc, Binary, Crypto)
+  PDF Certificate: pdfs/IEEE-CTF.pdf
 `;
         break;
 
@@ -1123,7 +1127,7 @@ Nmap done: 1 IP address scanned in 0.42 seconds.
 OMAR IBRAHIM — RESUME DOSSIER
 Penetration Tester & Ethical Hacker
 Email: omarforsec@gmail.com | Phone: 01061408612
-Rankings: Top 7% TryHackMe | 3rd Nationally Egypt (Embedded)
+Rankings: HTB Rank Skilled (Lvl 33) | Top 7% TryHackMe | 3rd Nationally Egypt (Embedded)
 ======================================================
 `;
         } else {

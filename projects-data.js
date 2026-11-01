@@ -9,24 +9,25 @@ var PROJECTS_DATA = [
   {
     id: "tryhackme-ctf",
     title: "Penetration Testing Labs & CTF Operations",
-    subtitle: "TryHackMe Top 7% Rank & HITU IEEE CTF 4th Place Solo",
+    subtitle: "HTB 'Skilled' Rank, TryHackMe Top 7% & HITU IEEE CTF 4th Solo",
     affiliation: "Self-Employed",
     affiliationName: "Independent / CTF",
     featured: true,
-    badge: "Top 8% Global Ranking",
+    badge: "HTB Skilled & THM Top 7%",
     image: "assets/images/pentest-lab.jpg",
     photos: [
       "assets/images/pentest-lab.jpg"
     ],
     videoUrl: "",
-    tags: ["Nmap", "Metasploit", "Gobuster", "Linux Privilege Escalation", "OWASP Top 10", "Burp Suite"],
+    tags: ["Hack The Box", "TryHackMe", "Nmap", "Metasploit", "Gobuster", "Linux Privilege Escalation", "OWASP Top 10", "Burp Suite"],
     date: "2024 - 2026",
     role: "Offensive Security Researcher / Solo CTF Competitor",
-    summary: "Hands-on offensive security operations spanning over 70+ completed virtual laboratory environments. Ranked among the Top 7% worldwide on TryHackMe and placed 4th solo in the HITU IEEE CTF against 3-5 member competitor teams.",
+    summary: "Hands-on offensive security operations spanning Hack The Box ('Skilled' Rank, Level 33, 14,310 XP) and TryHackMe (Top 7% worldwide across 70+ completed virtual labs), plus 4th solo placement in the HITU IEEE CTF against 3-5 member competitor teams.",
     fullDescription: `
       An extensive repository of offensive security engagements, room walkthroughs, and custom exploit chains across Linux and Windows environments. Demonstrates real-world red teaming methodologies from reconnaissance and active service enumeration to weaponization, privilege escalation, and lateral movement.
     `,
     highlights: [
+      "Achieved official 'Skilled' Rank (Level 33, 14,310 XP, 6 Badges) on Hack The Box with 753.2 XP weekly average.",
       "Secured Top 7% global ranking on TryHackMe across 70+ simulated attack scenarios.",
       "Achieved 4th place at HITU IEEE CTF competing solo against teams of 3–5 engineers under rigorous time constraints.",
       "Mastered Linux kernel exploitation, SUID binary abuses, sudo configuration flaws, and cron job hijacking.",
