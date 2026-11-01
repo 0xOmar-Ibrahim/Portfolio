@@ -9,7 +9,7 @@ var PROJECTS_DATA = [
   {
     id: "tryhackme-ctf",
     title: "Penetration Testing Labs & CTF Operations",
-    subtitle: "TryHackMe Top 8% Rank & HITU IEEE CTF 4th Place Solo",
+    subtitle: "TryHackMe Top 7% Rank & HITU IEEE CTF 4th Place Solo",
     affiliation: "Self-Employed",
     affiliationName: "Independent / CTF",
     featured: true,
@@ -22,12 +22,12 @@ var PROJECTS_DATA = [
     tags: ["Nmap", "Metasploit", "Gobuster", "Linux Privilege Escalation", "OWASP Top 10", "Burp Suite"],
     date: "2024 - 2026",
     role: "Offensive Security Researcher / Solo CTF Competitor",
-    summary: "Hands-on offensive security operations spanning over 80+ completed virtual laboratory environments. Ranked among the Top 8% worldwide on TryHackMe and placed 4th solo in the HITU IEEE CTF against 3-5 member competitor teams.",
+    summary: "Hands-on offensive security operations spanning over 70+ completed virtual laboratory environments. Ranked among the Top 7% worldwide on TryHackMe and placed 4th solo in the HITU IEEE CTF against 3-5 member competitor teams.",
     fullDescription: `
       An extensive repository of offensive security engagements, room walkthroughs, and custom exploit chains across Linux and Windows environments. Demonstrates real-world red teaming methodologies from reconnaissance and active service enumeration to weaponization, privilege escalation, and lateral movement.
     `,
     highlights: [
-      "Secured Top 8% global ranking on TryHackMe across 70+ simulated attack scenarios.",
+      "Secured Top 7% global ranking on TryHackMe across 70+ simulated attack scenarios.",
       "Achieved 4th place at HITU IEEE CTF competing solo against teams of 3–5 engineers under rigorous time constraints.",
       "Mastered Linux kernel exploitation, SUID binary abuses, sudo configuration flaws, and cron job hijacking.",
       "Extensive web application penetration testing for SQLi, XSS, SSRF, IDOR, and Broken Authentication."

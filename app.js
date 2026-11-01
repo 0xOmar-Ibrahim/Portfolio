@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typewriterElement) {
     const roles = [
       "Penetration Tester & Ethical Hacker",
-      "TryHackMe Top 8% Offensive Security",
+      "TryHackMe Top 7% Offensive Security",
       "Embedded Security & IoT Developer",
       "Low-Level x86-64 Assembly & C Specialist",
       "Vulnerability Assessment & CVE Researcher"
@@ -1027,7 +1027,7 @@ Email: omarforsec@gmail.com | Phone: 01061408612 / 01144130977
   PDF Certificate: pdfs/IEEE-CTF.pdf
 <span class="cyber-green">[⚡] HAWAII CYBER CTF (Hack The Box):</span> <strong>#9 Rank Global</strong> (Adversarial Infrastructure, AD, Web)
   PDF Certificate: pdfs/Hawaii-Cyber-CTF.pdf
-<span class="cyber-cyan">[🛡️] TRYHACKME ARENA:</span> <strong>Top 8% Worldwide</strong> across 80+ lab attack rooms
+<span class="cyber-cyan">[🛡️] TRYHACKME ARENA:</span> <strong>Top 7% Worldwide</strong> across 70+ lab attack rooms
 `;
         break;
 
@@ -1123,7 +1123,7 @@ Nmap done: 1 IP address scanned in 0.42 seconds.
 OMAR IBRAHIM — RESUME DOSSIER
 Penetration Tester & Ethical Hacker
 Email: omarforsec@gmail.com | Phone: 01061408612
-Rankings: Top 8% TryHackMe | 3rd Nationally Egypt (Embedded)
+Rankings: Top 7% TryHackMe | 3rd Nationally Egypt (Embedded)
 ======================================================
 `;
         } else {
