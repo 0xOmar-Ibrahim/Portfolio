@@ -423,7 +423,7 @@ var PROJECTS_DATA = [
       "assets/projs-imgs/smart-home-11.jpg"
     ],
     videoUrl: "",
-    github: "/pdfs/Graguation-Project-Book.pdf",
+    github: "pdfs/Graguation-Project-Book.pdf",
     tags: ["Flutter", "ESP8266 / ESP32", "Firebase", "PCB Design", "Team Leadership", "IoT Security"],
     date: "2025",
     role: "Technical Project Lead & PCB Designer",
