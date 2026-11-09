@@ -239,6 +239,38 @@ strong { font-weight: 600; color: var(--fg); }
 .link-btn { display: inline-flex; align-items: center; gap: .4em; min-height: 44px; font-weight: 600; color: var(--enig); }
 .link-btn:hover { color: var(--fog); }
 
+/* ---- Markdown writeups ---- */
+.prose { margin-top: 2rem; max-width: 72ch; font-size: 1.04rem; line-height: 1.7; color: var(--fog); overflow-wrap: break-word; }
+.prose > * + * { margin-top: 1.05em; }
+.prose h1, .prose h2 { font: 700 clamp(1.45rem, 2.4vw, 2.1rem)/1.1 var(--display); font-variation-settings: "wdth" 84; margin-top: 2.2em; padding-bottom: .4rem; border-bottom: 1px solid var(--line); }
+.prose h3 { font: 700 clamp(1.15rem, 1.8vw, 1.45rem)/1.15 var(--display); font-variation-settings: "wdth" 86; margin-top: 1.8em; }
+.prose h4 { font: 400 .72rem/1.5 var(--mono); text-transform: uppercase; color: var(--enig); margin-top: 1.6em; }
+.prose a { color: var(--enig); text-decoration: underline; text-underline-offset: 3px; }
+.prose a:hover { color: var(--fog); }
+.prose strong { color: var(--fog); }
+.prose ul, .prose ol { padding-left: 1.4rem; }
+.prose ul { list-style: none; }
+.prose ul > li { position: relative; }
+.prose ul > li::before { content: ""; position: absolute; left: -1.1rem; top: .7em; width: 6px; height: 6px; background: var(--enig); transform: rotate(45deg); }
+.prose ol { list-style: decimal; }
+.prose ol > li::marker { color: var(--enig); font-family: var(--mono); font-size: .85em; }
+.prose li + li { margin-top: .35em; }
+.prose blockquote { margin-left: 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid var(--signal); color: var(--fog-dim); }
+.prose :not(pre) > code { padding: .12em .38em; background: var(--mask-950); border: 1px solid var(--line); font: 400 .86em var(--mono); color: var(--enig); }
+.prose pre { position: relative; padding: 1rem 1rem; background: var(--mask-950); border-left: 2px solid var(--enig); overflow-x: auto; font: 400 .8rem/1.65 var(--mono); }
+.prose pre code { font: inherit; color: var(--fog); }
+.prose__copy { position: absolute; top: .4rem; right: .4rem; min-height: 32px; padding: 0 .6rem; border: 1px solid var(--line); background: var(--mask-900); color: var(--fog-dim); font-size: .6rem; opacity: 0; transition: opacity .2s, color .2s; }
+.prose pre:hover .prose__copy, .prose__copy:focus-visible { opacity: 1; }
+@media (hover: none) { .prose__copy { opacity: 1; } }
+.prose__copy:hover { color: var(--enig); border-color: var(--enig); }
+.prose img { max-width: 100%; height: auto; border: 1px solid var(--line); }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+.prose__table { overflow-x: auto; }
+.prose table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+.prose th, .prose td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.prose th { font: 400 .64rem/1.4 var(--mono); text-transform: uppercase; color: var(--fog-dim); }
+.writeup__title .sev { vertical-align: middle; margin-right: .3rem; }
+
 /* ---- Work: selected gallery ---- */
 .work { background: var(--mask-950); }
 .selected { position: relative; padding-top: var(--sec); overflow: hidden; }

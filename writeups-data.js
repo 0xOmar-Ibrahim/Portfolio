@@ -1,7 +1,9 @@
 /**
- * Omar Ibrahim - Findings and writeups.
+ * Omar Ibrahim - Findings (structured audits and disclosures, shown in the Findings section).
  *
- * TO ADD A WRITEUP: copy the template below into the array (strongest first) and fill it in.
+ * For machine and CTF writeups, use a Markdown file in writeups/ instead: see writeups/README.md.
+ *
+ * TO ADD A FINDING: copy the template below into the array (strongest first) and fill it in.
  * All text is plain text. Keep "draft: true" until it is ready, and drafts stay hidden.
  *
  * Only publish what you are allowed to:

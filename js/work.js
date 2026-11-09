@@ -231,7 +231,7 @@ function writeupHTML(w) {
 }
 
 export function renderWriteups() {
-  const host = $('#writeups');
+  const host = $('#findings-list');
   const list = writeups();
   // No published writeups: hide the section and its links rather than showing an empty shelf.
   if (!list.length) {
@@ -265,6 +265,18 @@ function revealPanel() {
   }
 }
 
+export function showInPanel(html, hash, onReady) {
+  teardown?.();
+  teardown = null;
+  panel.onclick = null;
+  dlg.onkeydown = null;
+  panel.innerHTML = html;
+  panel.scrollTop = 0;
+  onReady?.(panel);
+  history.replaceState(null, '', location.pathname + location.search + hash);
+  revealPanel();
+}
+
 export function openWriteup(id) {
   const w = writeups().find((x) => x.id === id);
   if (!w) return;
@@ -274,7 +286,7 @@ export function openWriteup(id) {
   dlg.onkeydown = null;
   panel.innerHTML = writeupHTML(w);
   panel.scrollTop = 0;
-  history.replaceState(null, '', `#writeup/${id}`);
+  history.replaceState(null, '', location.pathname + location.search + `#writeup/${id}`);
   revealPanel();
 }
 
@@ -282,7 +294,7 @@ export function openCase(id) {
   const p = data().find((x) => x.id === id);
   if (!p) return;
   fill(p);
-  history.replaceState(null, '', `#case/${id}`);
+  history.replaceState(null, '', location.pathname + location.search + `#case/${id}`);
   if (dlg.open) return;
   revealPanel();
 }

@@ -3,6 +3,7 @@ import { animate, stagger } from '../assets/vendor/motion.subset.min.js';
 import { $, $$, toast, lockPage, reducedMotion, setLenis, getLenis, scrollToTarget } from './util.js';
 import { initWork, renderCerts, renderWriteups } from './work.js';
 import { initConsole } from './console.js';
+import { initWriteups } from './writeups.js';
 
 const { gsap, ScrollTrigger, SplitText, Lenis } = window;
 const MOTION = !reducedMotion && Boolean(gsap && ScrollTrigger && SplitText);
@@ -30,13 +31,13 @@ function playBoot() {
   try { sessionStorage.setItem('booted', '1'); } catch (e) { /* storage blocked */ }
   const log = $('#boot-log');
   const addr = $('#boot-addr');
-  const lines = ['POWER GOOD', 'CLOCK LOCKED', 'MAP 0x00-0x90 OK', 'SECURE BOOT: ME'];
+  const lines = ['POWER GOOD', 'CLOCK LOCKED', 'MAP 0x00-0xA0 OK', 'SECURE BOOT: ME'];
   const counter = { v: 0 };
   return new Promise((resolve) => {
     gsap.timeline({ onComplete: () => { boot.remove(); document.documentElement.classList.remove('js-boot'); } })
-      .to(counter, { v: 144, duration: 0.85, ease: 'power2.inOut', onUpdate: () => {
+      .to(counter, { v: 160, duration: 0.85, ease: 'power2.inOut', onUpdate: () => {
         addr.textContent = '0x' + Math.round(counter.v).toString(16).toUpperCase().padStart(2, '0');
-        log.textContent = lines.slice(0, Math.ceil((counter.v / 144) * lines.length)).join('\n');
+        log.textContent = lines.slice(0, Math.ceil((counter.v / 160) * lines.length)).join('\n');
       } })
       .add(resolve, '+=0.05')
       .to(boot, { yPercent: -100, duration: 0.65, ease: 'expo.inOut' }, '+=0.05');
@@ -245,7 +246,7 @@ function initChrome() {
     const y = scrollY;
     bar.classList.toggle('is-solid', y > 40);
     const max = document.documentElement.scrollHeight - innerHeight;
-    pc.textContent = '0x' + Math.round((y / Math.max(max, 1)) * 144).toString(16).toUpperCase().padStart(2, '0');
+    pc.textContent = '0x' + Math.round((y / Math.max(max, 1)) * 160).toString(16).toUpperCase().padStart(2, '0');
     if (!reducedMotion && !document.body.classList.contains('locked')) {
       const hide = y > last + 4 && y > innerHeight * 0.8;
       const show = y < last - 4 || y < 80;
@@ -334,8 +335,11 @@ async function start() {
   $('#year').textContent = new Date().getFullYear();
   renderCerts();
   renderWriteups();
+  const posts = initWriteups();
   initConsole();
   initMenu();
+
+  await Promise.race([posts, new Promise((r) => setTimeout(r, 2500))]);
 
   if (!MOTION) {
     if (reducedMotion) document.documentElement.classList.remove('js-boot');
@@ -365,7 +369,7 @@ async function start() {
   heroIntro(scene);
   ScrollTrigger.refresh();
   addEventListener('load', () => ScrollTrigger.refresh());
-  if (location.hash && !/^#(case|writeup)\//.test(location.hash) && $(location.hash)) getLenis()?.scrollTo(location.hash, { immediate: true });
+  if (location.hash && !/^#(case|writeup|writeups)\//.test(location.hash) && $(location.hash)) getLenis()?.scrollTo(location.hash, { immediate: true });
 }
 
 start().catch((err) => {

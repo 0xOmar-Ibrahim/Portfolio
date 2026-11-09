@@ -2,6 +2,7 @@
 import { animate } from '../assets/vendor/motion.subset.min.js';
 import { $, $$, esc, lockPage, reducedMotion } from './util.js';
 import { openCase, openWriteup } from './work.js';
+import { getWriteups, openPost } from './writeups.js';
 
 const RESUME = 'pdfs/Omar%20Ibrahim%20Fathy%20-%20Junior%20Pentester.pdf';
 const HTB = 'https://profile.hackthebox.com/profile/019d54eb-0059-73f5-b194-30bb57793407';
@@ -15,7 +16,7 @@ const COMMANDS = {
   help: () => {
     const rows = [
       ['whoami', 'Who I am and where I rank'], ['ctf', 'Competition results and platform rankings'], ['skills', 'Languages, tools and methods'],
-      ['projects', `List all ${window.PROJECTS_DATA.length} projects`], ['findings', 'List audits and writeups'], ['open <id>', 'Open a project or writeup'], ['exp', 'Work and training history'],
+      ['projects', `List all ${window.PROJECTS_DATA.length} projects`], ['findings', 'List audits and disclosures'], ['writeups', 'List writeups'], ['open <id>', 'Open a project, finding or writeup'], ['exp', 'Work and training history'],
       ['edu', 'Education and national ranking'], ['certs', 'Certificates with links'], ['contact', 'Email, phone and profiles'], ['resume', 'Open the resume PDF'],
       ['nmap [host]', 'A joke scan of this page, not real traffic'], ['clear', 'Clear the screen'], ['exit', 'Close the console'],
     ];
@@ -67,7 +68,9 @@ PORT      STATE  SERVICE
   matrix: () => g('01001111 01001101 01000001 01010010'),
 };
 COMMANDS.ctfs = COMMANDS.ctf;
-COMMANDS.writeups = COMMANDS.findings;
+COMMANDS.writeups = () => (getWriteups().length
+  ? getWriteups().map((x) => `${g(esc(x.date))}  ${g(esc(x.slug.padEnd(26)))}${esc(x.title)}`).join('\n') + `\n\n${d("Type 'open <id>' to read one")}`
+  : d('No writeups published yet.'));
 COMMANDS.certificates = COMMANDS.certs;
 
 export function initConsole() {
@@ -141,7 +144,13 @@ export function initConsole() {
         setTimeout(() => { dlg.close(); lockPage(false); openWriteup(report.id); }, 300);
         return;
       }
-      if (!hit) { print(r(args[0] ? `'${esc(args[0])}' not found. Type 'projects' or 'findings' for IDs.` : "Usage: open <id>. Type 'projects' or 'findings' for IDs.")); return; }
+      const post = getWriteups().find((x) => x.slug === (args[0] || '').toLowerCase());
+      if (post) {
+        print(`${g('[+]')} Opening ${esc(post.title)}`);
+        setTimeout(() => { dlg.close(); lockPage(false); openPost(post.slug); }, 300);
+        return;
+      }
+      if (!hit) { print(r(args[0] ? `'${esc(args[0])}' not found. Type 'projects', 'findings' or 'writeups' for IDs.` : "Usage: open <id>. Type 'projects', 'findings' or 'writeups' for IDs.")); return; }
       print(`${g('[+]')} Opening ${esc(hit.title)}`);
       setTimeout(() => { dlg.close(); lockPage(false); openCase(hit.id); }, 300);
       return;
