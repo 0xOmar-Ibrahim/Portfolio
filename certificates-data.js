@@ -1,6 +1,6 @@
 /**
  * Omar Ibrahim - Verified Certificates & Credentials Dataset
- * To add a new certificate, simply add a new object to this array.
+ * To add a certificate, add an object to this array. Set hidden: true to keep one in the file but off the site.
  */
 
 var CERTIFICATES_DATA = [
@@ -49,6 +49,7 @@ var CERTIFICATES_DATA = [
   },
   {
     id: "oracle-java",
+    hidden: true,
     title: "Java Fundamentals",
     issuer: "Oracle",
     issuerBadge: "oracle-badge",
@@ -81,18 +82,8 @@ var CERTIFICATES_DATA = [
     highlight: false
   },
   {
-    id: "google-ai-productivity",
-    title: "Boost Your Productivity with AI",
-    issuer: "Google",
-    issuerBadge: "google-badge",
-    date: "Aug 2024",
-    desc: "Leveraging generative AI workflows, automated prompt engineering, and intelligent scripting for security analysis.",
-    tag: "AI Workflows",
-    fileUrl: "certs/Google-AI.pdf",
-    highlight: false
-  },
-  {
     id: "google-fundamental-of-marketing",
+    hidden: true,
     title: "Fundamentals of Digital Marketing",
     issuer: "Google",
     issuerBadge: "google-badge",
@@ -100,28 +91,6 @@ var CERTIFICATES_DATA = [
     desc: "Practical foundation in digital marketing principles including SEO, content strategy, paid advertising, and analytics.",
     tag: "Marketing",
     fileUrl: "certs/Google-marketing.pdf",
-    highlight: false
-  },
-  {
-    id: "ms-ai-concepts",
-    title: "Introduction to AI / AI Concepts",
-    issuer: "Microsoft",
-    issuerBadge: "ms-badge",
-    date: "Jun 2024",
-    desc: "Fundamentals of Artificial Intelligence, neural networks, machine learning principles, and computational ethics.",
-    tag: "AI Fundamentals",
-    fileUrl: "certs/Microsoft-IndroDuction-to-AI.pdf",
-    highlight: false
-  },
-  {
-    id: "prompt engineering",
-    title: "Prompt Engineering",
-    issuer: "Microsoft",
-    issuerBadge: "ms-badge",
-    date: "Jun 2024",
-    desc: "Comprehensive exploration of prompt design, few-shot and chain-of-thought techniques, and optimization strategies for reliable LLM outputs.",
-    tag: "Prompt Engineering",
-    fileUrl: "certs/Microsoft-pmt.pdf",
     highlight: false
   },
   {
@@ -146,7 +115,39 @@ var CERTIFICATES_DATA = [
     fileUrl: "certs/CodeAlpha-python.pdf",
     highlight: false
   },
-
+  {
+    id: "google-ai-productivity",
+    title: "Boost Your Productivity with AI",
+    issuer: "Google",
+    issuerBadge: "google-badge",
+    date: "Aug 2024",
+    desc: "Leveraging generative AI workflows, automated prompt engineering, and intelligent scripting for security analysis.",
+    tag: "AI Workflows",
+    fileUrl: "certs/Google-AI.pdf",
+    highlight: false
+  },
+  {
+    id: "ms-ai-concepts",
+    title: "Introduction to AI / AI Concepts",
+    issuer: "Microsoft",
+    issuerBadge: "ms-badge",
+    date: "Jun 2024",
+    desc: "Fundamentals of Artificial Intelligence, neural networks, machine learning principles, and computational ethics.",
+    tag: "AI Fundamentals",
+    fileUrl: "certs/Microsoft-IndroDuction-to-AI.pdf",
+    highlight: false
+  },
+  {
+    id: "prompt engineering",
+    title: "Prompt Engineering",
+    issuer: "Microsoft",
+    issuerBadge: "ms-badge",
+    date: "Jun 2024",
+    desc: "Comprehensive exploration of prompt design, few-shot and chain-of-thought techniques, and optimization strategies for reliable LLM outputs.",
+    tag: "Prompt Engineering",
+    fileUrl: "certs/Microsoft-pmt.pdf",
+    highlight: false
+  },
 ];
 
 if (typeof window !== 'undefined') {

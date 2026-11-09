@@ -76,7 +76,7 @@ function passwordTool(host) {
     }
     host.querySelector('#t-pass-n').textContent = n;
     host.querySelector('#t-pass-out').textContent = s;
-    host.querySelector('#t-pass-bits').textContent = `About ${(n * Math.log2(CHARS.length)).toFixed(1)} bits of entropy. Generated locally, never sent anywhere.`;
+    host.querySelector('#t-pass-bits').textContent = `About ${(n * Math.log2(CHARS.length)).toFixed(1)} bits of entropy. A browser version using crypto.getRandomValues. Nothing leaves your device.`;
   };
   len.addEventListener('input', gen);
   host.querySelector('#t-pass-new').addEventListener('click', gen);
@@ -89,6 +89,7 @@ function numberTool(host) {
       <label for="t-num">Decimal value (0 to 4294967295)</label>
       <input id="t-num" type="number" value="1337" min="0" max="4294967295">
       <div class="tool__out" id="t-num-out"></div>
+      <div class="tool__row"><span>A browser version that also shows byte order, which the desktop tool does not.</span></div>
     </div>`;
   const input = host.querySelector('#t-num');
   const out = host.querySelector('#t-num-out');

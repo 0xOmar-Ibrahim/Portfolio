@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Omar Ibrahim | Penetration Tester &amp; Ethical Hacker</title>
-  <meta name="description" content="Omar Ibrahim is a penetration tester from Giza, Egypt. Hack The Box Skilled rank, TryHackMe top 7%, 9th globally at Hawaii Cyber CTF. Web app testing, vulnerability assessment, embedded and IoT security, x86-64 and C.">
+  <meta name="description" content="Omar Ibrahim is a penetration tester from Giza, Egypt. Found and responsibly disclosed a critical production IDOR exposing PII. Hack The Box Skilled rank, TryHackMe top 7%, 9th globally at Hawaii Cyber CTF. Web app testing, vulnerability assessment, embedded and IoT security, x86-64 and C.">
   <meta name="author" content="Omar Ibrahim">
   <meta name="theme-color" content="#120714">
   <link rel="canonical" href="https://0xomar-ibrahim.github.io/Portfolio/">
@@ -37,6 +37,7 @@
   <script src="assets/vendor/lenis.min.js" defer></script>
   <script src="projects-data.js?v=3.0" defer></script>
   <script src="certificates-data.js?v=3.0" defer></script>
+  <script src="writeups-data.js?v=3.0" defer></script>
   <script type="module" src="js/main.js?v=3.0"></script>
 </head>
 
@@ -68,7 +69,8 @@
     <a href="#top" class="bar__brand" aria-label="Omar Ibrahim, back to top">0x4FMR</a>
     <nav class="bar__nav" aria-label="Primary">
       <a href="#profile">Profile</a>
-      <a href="#scoreboard">Scoreboard</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#findings">Findings</a>
       <a href="#work">Work</a>
       <a href="#record">Record</a>
       <a href="#contact">Contact</a>
@@ -87,13 +89,14 @@
   <nav class="memmap" id="memmap" aria-label="Section index">
     <a href="#top"><b>0x00</b><i>Reset</i></a>
     <a href="#profile"><b>0x10</b><i>Profile</i></a>
-    <a href="#scoreboard"><b>0x20</b><i>Scoreboard</i></a>
-    <a href="#work"><b>0x30</b><i>Work</i></a>
-    <a href="#record"><b>0x40</b><i>Record</i></a>
-    <a href="#arsenal"><b>0x50</b><i>Arsenal</i></a>
-    <a href="#training"><b>0x60</b><i>Training</i></a>
-    <a href="#credentials"><b>0x70</b><i>Credentials</i></a>
-    <a href="#contact"><b>0x80</b><i>Contact</i></a>
+    <a href="#achievements"><b>0x20</b><i>Achievements</i></a>
+    <a href="#findings"><b>0x30</b><i>Findings</i></a>
+    <a href="#work"><b>0x40</b><i>Work</i></a>
+    <a href="#record"><b>0x50</b><i>Record</i></a>
+    <a href="#arsenal"><b>0x60</b><i>Arsenal</i></a>
+    <a href="#training"><b>0x70</b><i>Training</i></a>
+    <a href="#credentials"><b>0x80</b><i>Credentials</i></a>
+    <a href="#contact"><b>0x90</b><i>Contact</i></a>
   </nav>
 
   <main>
@@ -117,8 +120,8 @@
           <p class="mono hero__role">Penetration Tester &amp; Ethical Hacker</p>
           <p class="hero__lede">I test systems the way attackers read them: from web requests and network services down to firmware, registers and assembly.</p>
           <div class="hero__cta">
-            <a class="btn btn--gold magnet" href="#work"><span>See the work</span><svg class="ico"><use href="#i-e"/></svg></a>
-            <button class="btn btn--line magnet" type="button" data-console><svg class="ico"><use href="#i-term"/></svg><span>Open the console</span></button>
+            <a class="btn btn--gold" href="#work"><span>See the work</span><svg class="ico"><use href="#i-e"/></svg></a>
+            <button class="btn btn--line" type="button" data-console><svg class="ico"><use href="#i-term"/></svg><span>Open the console</span></button>
           </div>
         </div>
         <dl class="proof" data-hero-rise>
@@ -147,6 +150,7 @@
           <p class="statement" data-words>I started at the register and worked my way up to the browser. That is why I read an application as a stack of things that can fail, not as a list of endpoints.</p>
           <div class="profile__bio" data-reveal>
             <p>I'm an IT student and aspiring penetration tester, with hundreds of hours on <strong>Hack The Box</strong> (Skilled rank, Level 33, 14,310 XP), <strong>TryHackMe</strong> (top 7%) and the <strong>PortSwigger Web Security Academy</strong>.</p>
+            <p>I found and responsibly disclosed a critical <strong>IDOR on a live production website</strong> that exposed national IDs, names and photos, and I recently audited my own older code the same way.</p>
             <p>My method covers the full lifecycle: reconnaissance, web enumeration, vulnerability validation, CVE analysis with tools like Metasploit and OpenVAS, then remediation advice a team can act on.</p>
             <p>Alongside security, I shipped embedded and IoT systems at LABstar and wrote low-level software in C and x86-64 assembly. That background goes with me into every engagement.</p>
           </div>
@@ -161,12 +165,12 @@
       </ol>
     </section>
 
-    <!-- 0x20 SCOREBOARD -->
-    <section class="sec board" id="scoreboard" data-theme="mask">
+    <!-- 0x20 ACHIEVEMENTS -->
+    <section class="sec board" id="achievements" data-theme="mask">
       <header class="chead">
         <span class="addr">0x20</span>
-        <h2 data-split>Scoreboard</h2>
-        <p class="chead__note">Live machines, timed competitions and public rankings. Every result links to its proof.</p>
+        <h2 data-split>Achievements</h2>
+        <p class="chead__note">Competitions, public rankings and national recognition.</p>
       </header>
 
       <div class="scores">
@@ -220,14 +224,35 @@
           </div>
           <a class="score__link" href="https://profile.hackthebox.com/profile/019d54eb-0059-73f5-b194-30bb57793407" target="_blank" rel="noopener">View profile <svg class="ico"><use href="#i-ne"/></svg></a>
         </article>
+
+        <article class="score" data-reveal>
+          <p class="score__big score__big--rank"><span data-count="3">3</span><span class="score__hash">rd</span></p>
+          <div class="score__body">
+            <h3>3rd Nationally in Egypt</h3>
+            <p class="mono score__org">Embedded Systems &amp; AI &middot; MICA &middot; Jun 2025</p>
+            <p>Ranked <strong>3rd nationally across Egypt</strong> for Embedded Systems and Artificial Intelligence engineering.</p>
+            <ul class="tags"><li>Embedded C</li><li>AI</li><li>PCB Design</li></ul>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- 0x30 WORK -->
+    <!-- 0x30 FINDINGS -->
+    <section class="sec findings" id="findings" data-theme="mask">
+      <header class="chead">
+        <span class="addr">0x30</span>
+        <h2 data-split>Findings</h2>
+        <p class="chead__note">Bugs I found, how I proved them and how to fix them. Including the ones in my own code.</p>
+      </header>
+      <div class="writeups" id="writeups"></div>
+      <noscript><p>Reading the writeups needs JavaScript.</p></noscript>
+    </section>
+
+    <!-- 0x40 WORK -->
     <section class="work" id="work" data-theme="mask">
       <div class="selected" id="selected">
         <header class="chead chead--work">
-          <span class="addr">0x30</span>
+          <span class="addr">0x40</span>
           <h2 data-split>Work</h2>
           <p class="chead__note">Security research, production embedded systems and tools built from scratch.</p>
         </header>
@@ -242,15 +267,14 @@
         <ul class="rows" id="rows"></ul>
         <noscript><p>The project index needs JavaScript. All source code is on <a href="https://github.com/0xOmar-Ibrahim">GitHub</a>.</p></noscript>
       </div>
-      <div class="peek" id="peek" aria-hidden="true"></div>
     </section>
 
-    <!-- 0x40 RECORD -->
+    <!-- 0x50 RECORD -->
     <section class="sec record" id="record" data-theme="mask">
       <header class="chead">
-        <span class="addr">0x40</span>
+        <span class="addr">0x50</span>
         <h2 data-split>Record</h2>
-        <p class="chead__note">Production engineering, security training and automation.</p>
+        <p class="chead__note">Independent research, security training and production engineering.</p>
       </header>
 
       <div class="timeline" id="timeline">
@@ -290,6 +314,21 @@
 
         <article class="job">
           <span class="via" aria-hidden="true"></span>
+          <p class="mono job__date">Feb 2025</p>
+          <div class="job__main">
+            <p class="mono job__kind">Independent research</p>
+            <h3>Web Application Security Researcher</h3>
+            <p class="job__org">Independent</p>
+            <ul class="job__list">
+              <li><strong>Production IDOR discovery.</strong> Discovered and demonstrated a critical Insecure Direct Object Reference on a live production website, proving unauthorized exposure of PII, including national ID numbers, names and photos, through object identifier manipulation.</li>
+              <li><strong>Responsible disclosure.</strong> Wrote an assessment report with reproduction steps, impact analysis and specific remediation guidance, following responsible disclosure practices.</li>
+            </ul>
+            <ul class="tags"><li>IDOR</li><li>PII Exposure</li><li>Broken Access Control</li><li>Manual Testing</li><li>Reporting</li></ul>
+          </div>
+        </article>
+
+        <article class="job">
+          <span class="via" aria-hidden="true"></span>
           <p class="mono job__date">Aug 2023 &ndash; Jun 2025</p>
           <div class="job__main">
             <p class="mono job__kind">Work experience</p>
@@ -307,10 +346,10 @@
       </div>
     </section>
 
-    <!-- 0x50 ARSENAL -->
+    <!-- 0x60 ARSENAL -->
     <section class="sec paper arsenal" id="arsenal" data-theme="paper" data-panel>
       <header class="chead">
-        <span class="addr">0x50</span>
+        <span class="addr">0x60</span>
         <h2 data-split>Arsenal</h2>
       </header>
 
@@ -326,6 +365,7 @@
             <div><dt>OWASP Top 10</dt><dd>Core focus</dd></div>
             <div><dt>Manual web pentesting</dt><dd>Core focus</dd></div>
             <div><dt>Reconnaissance &amp; enumeration</dt><dd>Advanced</dd></div>
+            <div><dt>API security &amp; logic flaws</dt><dd>Manual</dd></div>
             <div><dt>Exploitation techniques</dt><dd>Advanced</dd></div>
             <div><dt>Vulnerability assessment</dt><dd>Advanced</dd></div>
             <div><dt>Networking fundamentals</dt><dd>TCP/IP, OSI</dd></div>
@@ -340,7 +380,7 @@
             <div><dt>Burp Suite</dt><dd>HTTP proxy</dd></div>
             <div><dt>Nmap</dt><dd>Port mapping</dd></div>
             <div><dt>Wireshark</dt><dd>Packets</dd></div>
-            <div><dt>Gobuster / Dirb</dt><dd>Fuzzing</dd></div>
+            <div><dt>Gobuster / FFUF</dt><dd>Fuzzing</dd></div>
             <div><dt>SQLmap &amp; Nessus</dt><dd>Auditing</dd></div>
             <div><dt>IDA Pro</dt><dd>Disassembly</dd></div>
           </dl>
@@ -372,21 +412,13 @@
       </div>
     </section>
 
-    <!-- 0x60 TRAINING -->
+    <!-- 0x70 TRAINING -->
     <section class="sec training" id="training" data-theme="mask">
       <header class="chead">
-        <span class="addr">0x60</span>
+        <span class="addr">0x70</span>
         <h2 data-split>Training</h2>
         <p class="chead__note">Education and technical leadership.</p>
       </header>
-
-      <div class="honor" data-reveal>
-        <p class="honor__big">3<sup>rd</sup></p>
-        <div>
-          <p class="mono honor__kind">National achievement</p>
-          <p class="honor__line">Ranked 3rd nationally across Egypt for Embedded Systems &amp; Artificial Intelligence engineering.</p>
-        </div>
-      </div>
 
       <div class="training__grid">
         <div>
@@ -430,10 +462,10 @@
       </div>
     </section>
 
-    <!-- 0x70 CREDENTIALS -->
+    <!-- 0x80 CREDENTIALS -->
     <section class="sec paper credentials" id="credentials" data-theme="paper" data-panel>
       <header class="chead">
-        <span class="addr">0x70</span>
+        <span class="addr">0x80</span>
         <h2 data-split>Credentials</h2>
         <p class="chead__note">Each one opens the original certificate as a PDF.</p>
       </header>
@@ -441,9 +473,9 @@
       <ul class="certs" id="certs"></ul>
     </section>
 
-    <!-- 0x80 CONTACT -->
+    <!-- 0x90 CONTACT -->
     <section class="contact" id="contact" data-theme="signal">
-      <p class="mono contact__addr">0x80 &middot; Contact</p>
+      <p class="mono contact__addr">0x90 &middot; Contact</p>
       <h2 class="contact__big" data-stretch>Send me a&nbsp;scope.</h2>
       <p class="contact__lede">Hiring for a pentest or offensive security role, or have a system that needs testing? Reach out directly.</p>
 
@@ -474,13 +506,14 @@
     <button class="menu__close" type="button" id="menu-close" aria-label="Close menu"><svg class="ico"><use href="#i-x"/></svg></button>
     <nav aria-label="Mobile">
       <a href="#profile"><b>0x10</b>Profile</a>
-      <a href="#scoreboard"><b>0x20</b>Scoreboard</a>
-      <a href="#work"><b>0x30</b>Work</a>
-      <a href="#record"><b>0x40</b>Record</a>
-      <a href="#arsenal"><b>0x50</b>Arsenal</a>
-      <a href="#training"><b>0x60</b>Training</a>
-      <a href="#credentials"><b>0x70</b>Credentials</a>
-      <a href="#contact"><b>0x80</b>Contact</a>
+      <a href="#achievements"><b>0x20</b>Achievements</a>
+      <a href="#findings"><b>0x30</b>Findings</a>
+      <a href="#work"><b>0x40</b>Work</a>
+      <a href="#record"><b>0x50</b>Record</a>
+      <a href="#arsenal"><b>0x60</b>Arsenal</a>
+      <a href="#training"><b>0x70</b>Training</a>
+      <a href="#credentials"><b>0x80</b>Credentials</a>
+      <a href="#contact"><b>0x90</b>Contact</a>
     </nav>
   </dialog>
 

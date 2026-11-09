@@ -1,7 +1,7 @@
 // 0xConsole: every command reads from the same data as the page, so counts cannot drift.
 import { animate } from '../assets/vendor/motion.subset.min.js';
 import { $, $$, esc, lockPage, reducedMotion } from './util.js';
-import { openCase } from './work.js';
+import { openCase, openWriteup } from './work.js';
 
 const RESUME = 'pdfs/Omar%20Ibrahim%20Fathy%20-%20Junior%20Pentester.pdf';
 const HTB = 'https://profile.hackthebox.com/profile/019d54eb-0059-73f5-b194-30bb57793407';
@@ -15,7 +15,7 @@ const COMMANDS = {
   help: () => {
     const rows = [
       ['whoami', 'Who I am and where I rank'], ['ctf', 'Competition results and platform rankings'], ['skills', 'Languages, tools and methods'],
-      ['projects', `List all ${window.PROJECTS_DATA.length} projects`], ['open <id>', 'Open a project case file'], ['exp', 'Work and training history'],
+      ['projects', `List all ${window.PROJECTS_DATA.length} projects`], ['findings', 'List audits and writeups'], ['open <id>', 'Open a project or writeup'], ['exp', 'Work and training history'],
       ['edu', 'Education and national ranking'], ['certs', 'Certificates with links'], ['contact', 'Email, phone and profiles'], ['resume', 'Open the resume PDF'],
       ['nmap [host]', 'A joke scan of this page, not real traffic'], ['clear', 'Clear the screen'], ['exit', 'Close the console'],
     ];
@@ -23,6 +23,7 @@ const COMMANDS = {
   },
   whoami: () => `${w('OMAR IBRAHIM')}  Penetration Tester &amp; Ethical Hacker
 Giza, Egypt. Open to pentest and offensive security roles.
+Found and disclosed a critical production IDOR exposing PII
 HTB Skilled (Lvl 33, 14,310 XP) / TryHackMe top 7% / #9 global Hawaii Cyber CTF / #4 solo IEEE CTF
 3rd nationally in Egypt, Embedded Systems &amp; AI`,
   ctf: () => `${g('HACK THE BOX')}     Skilled, Level 33, 14,310 XP, 753.2 XP/week, 19 active weeks, 6 badges
@@ -38,13 +39,15 @@ ${g('OFFENSIVE ')} OWASP Top 10, manual web pentesting, privilege escalation, CV
 ${g('TOOLS     ')} Metasploit, OpenVAS, Burp Suite, Nmap, Wireshark, Gobuster, IDA Pro, SQLmap
 ${g('HARDWARE  ')} ESP32, ESP8266, RFID security, custom PCB design, Firebase, Flutter`,
   projects: () => window.PROJECTS_DATA.map((p, i) => `${d(String(i + 1).padStart(2, '0'))} ${g(esc(p.id.padEnd(28)))}${esc(p.title)}`).join('\n') + `\n\n${d("Type 'open <id>', e.g. open morse-code-x86")}`,
+  findings: () => (window.WRITEUPS_DATA || []).filter((x) => !x.draft).map((x) => `${g(esc(x.id.padEnd(20)))}${esc(x.title)}`).join('\n') + `\n\n${d("Type 'open <id>', e.g. open self-audit")}`,
   exp: () => `${g('Aug 2026 - Sep 2026')}  Penetration Testing &amp; AppSec Trainee, NTI
 ${g('Oct 2025 - Nov 2025')}  Python Developer Intern, CodeAlpha
+${g('Feb 2025           ')}  Independent web security research, critical IDOR disclosed
 ${g('Aug 2023 - Jun 2025')}  Embedded Software Developer, LABstar`,
   edu: () => `${g('Expected 2029')}  BSc Information Technology, New Cairo Technological University
 ${g('Jun 2025     ')}  Diploma, Embedded Systems &amp; AI, MICA (Giza)
                ${w('Ranked 3rd nationally across Egypt')}`,
-  certs: () => window.CERTIFICATES_DATA.map((c) => `${g(esc(c.date.padEnd(9)))}${link(c.fileUrl, c.title)} ${d(esc(c.issuer))}`).join('\n'),
+  certs: () => window.CERTIFICATES_DATA.filter((c) => !c.hidden).map((c) => `${g(esc(c.date.padEnd(9)))}${link(c.fileUrl, c.title)} ${d(esc(c.issuer))}`).join('\n'),
   contact: () => `${g('email   ')} <a href="mailto:omarforsec@gmail.com">omarforsec@gmail.com</a>
 ${g('phone   ')} 01061408612 / 01144130977
 ${g('github  ')} ${link('https://github.com/0xOmar-Ibrahim')}
@@ -53,7 +56,7 @@ ${g('linkedin')} ${link('https://www.linkedin.com/in/0x4fmar')}`,
 Nmap scan report for ${esc(args[0] || 'portfolio.local')}
 PORT      STATE  SERVICE
 80/tcp    open   projects (${window.PROJECTS_DATA.length} found)
-443/tcp   open   certificates (${window.CERTIFICATES_DATA.length} found)
+443/tcp   open   certificates (${window.CERTIFICATES_DATA.filter((c) => !c.hidden).length} found)
 1337/tcp  open   ctf-scoreboard
 8080/tcp  open   recruiter-inbox ${g('&lt;-- try this one')}`,
   sudo: () => `omar is not in the sudoers file. ${r('This incident will be reported.')}`,
@@ -64,6 +67,7 @@ PORT      STATE  SERVICE
   matrix: () => g('01001111 01001101 01000001 01010010'),
 };
 COMMANDS.ctfs = COMMANDS.ctf;
+COMMANDS.writeups = COMMANDS.findings;
 COMMANDS.certificates = COMMANDS.certs;
 
 export function initConsole() {
@@ -87,7 +91,7 @@ export function initConsole() {
     print(`${w("Omar Ibrahim's offensive security console.")}\nType ${g('help')} or pick a command:`);
     const chips = document.createElement('div');
     chips.className = 'console__chips';
-    for (const c of ['whoami', 'ctf', 'projects', 'skills', 'certs', 'contact', 'nmap']) {
+    for (const c of ['whoami', 'ctf', 'findings', 'projects', 'skills', 'certs', 'contact', 'nmap']) {
       const b = document.createElement('button');
       b.type = 'button';
       b.textContent = c;
@@ -131,7 +135,13 @@ export function initConsole() {
     }
     if (name === 'open') {
       const hit = window.PROJECTS_DATA.find((p) => p.id.toLowerCase() === (args[0] || '').toLowerCase());
-      if (!hit) { print(r(args[0] ? `Project '${esc(args[0])}' not found. Type 'projects' for IDs.` : "Usage: open <id>. Type 'projects' for IDs.")); return; }
+      const report = (window.WRITEUPS_DATA || []).find((x) => !x.draft && x.id === (args[0] || '').toLowerCase());
+      if (report) {
+        print(`${g('[+]')} Opening ${esc(report.title)}`);
+        setTimeout(() => { dlg.close(); lockPage(false); openWriteup(report.id); }, 300);
+        return;
+      }
+      if (!hit) { print(r(args[0] ? `'${esc(args[0])}' not found. Type 'projects' or 'findings' for IDs.` : "Usage: open <id>. Type 'projects' or 'findings' for IDs.")); return; }
       print(`${g('[+]')} Opening ${esc(hit.title)}`);
       setTimeout(() => { dlg.close(); lockPage(false); openCase(hit.id); }, 300);
       return;

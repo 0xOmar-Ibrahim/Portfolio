@@ -142,7 +142,7 @@ export async function startBoard(canvas, { reduced = false } = {}) {
   const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
   camera.position.set(0, 0, 21);
 
-  const rig = new THREE.Group();    // pointer parallax + scroll
+  const rig = new THREE.Group();    // scroll
   const board = new THREE.Group();  // AnimationMixer clips
   rig.add(board);
   scene.add(rig);
@@ -237,7 +237,7 @@ export async function startBoard(canvas, { reduced = false } = {}) {
   const idleAction = mixer.clipAction(idle);
   idleAction.setLoop(THREE.LoopRepeat, Infinity);
 
-  const state = { scroll: 0, px: 0, py: 0, tx: 0, ty: 0, visible: true, base: { x: 0, y: 0, s: 1 } };
+  const state = { scroll: 0, visible: true, base: { x: 0, y: 0, s: 1 } };
 
   function fit() {
     const w = canvas.clientWidth || innerWidth;
@@ -255,8 +255,7 @@ export async function startBoard(canvas, { reduced = false } = {}) {
   }
 
   function draw() {
-    rig.rotation.x = state.py * 0.05 + state.scroll * 0.55;
-    rig.rotation.y = state.px * 0.07;
+    rig.rotation.x = state.scroll * 0.55;
     rig.position.z = state.scroll * 7;
     rig.position.y = state.base.y + state.scroll * 2.2;
     renderer.render(scene, camera);
@@ -277,10 +276,8 @@ export async function startBoard(canvas, { reduced = false } = {}) {
   timer.connect(document); // keeps deltas small after the tab has been hidden
 
   const onPointer = (e) => {
-    state.tx = (e.clientX / innerWidth) * 2 - 1;
-    state.ty = (e.clientY / innerHeight) * 2 - 1;
     // Project the pointer onto the board plane so nearby traces light up under it.
-    const v = new THREE.Vector3(state.tx, -state.ty, 0.5).unproject(camera).sub(camera.position).normalize();
+    const v = new THREE.Vector3((e.clientX / innerWidth) * 2 - 1, 1 - (e.clientY / innerHeight) * 2, 0.5).unproject(camera).sub(camera.position).normalize();
     const t = -camera.position.z / v.z;
     uniforms.uPointer.value.set(camera.position.x + v.x * t, camera.position.y + v.y * t + 0.8);
   };
@@ -291,8 +288,6 @@ export async function startBoard(canvas, { reduced = false } = {}) {
     const dt = timer.getDelta();
     uniforms.uTime.value = timer.getElapsed();
     mixer.update(dt);
-    state.px += (state.tx - state.px) * 0.05;
-    state.py += (state.ty - state.py) * 0.05;
     draw();
   };
 

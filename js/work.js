@@ -3,13 +3,18 @@ import { animate } from '../assets/vendor/motion.subset.min.js';
 import { $, $$, esc, lockPage, reducedMotion } from './util.js';
 import { hasTool, mountTool } from './tools.js';
 
-const SELECTED = ['tryhackme-ctf', 'smart-elevator-rfid', 'esp32-21-relay-controller', 'morse-code-x86', 'voice-smart-home'];
+const SELECTED = ['tryhackme-ctf', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'morse-code-x86', 'esp32-21-relay-controller'];
+
+// Index order: security first, then systems with a security angle, then the rest.
+const ORDER = ['tryhackme-ctf', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'electronics-mgmt-rbac', 'labstar-elevator-control', 'sensor-telemetry-pipeline', 'bank-management-system', 'morse-code-x86', 'keygarden-pass-gen', 'esp32-21-relay-controller', 'voice-smart-home', 'employee-management-c', 'cinema-management-c', 'number-system-converter'];
+
+// Earlier work, folded away under the "All" view so the first impression stays on security.
+const EARLIER = new Set(['cinema-management-c', 'number-system-converter']);
 
 // Better first frames than the data file's cover for the gallery.
 const SELECTED_COVER = {
   'smart-elevator-rfid': 'assets/projs-imgs/DWIN_RFID.png',
   'esp32-21-relay-controller': 'assets/projs-imgs/PCB-1.jpg',
-  'voice-smart-home': 'assets/projs-imgs/smart-home-11.jpg',
 };
 
 // Lab and CTF work has no real screenshots yet, so these get a typeset cover, not a stock image.
@@ -41,15 +46,24 @@ function renderSelected() {
       <span class="slide__text">
         <span class="slide__num mono">${String(i + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')} &middot; ${esc(p.date)}</span>
         <span class="slide__title">${esc(p.title)}</span>
-        <span class="slide__sub">${esc(p.subtitle)}</span>
+        <span class="slide__sub">${esc(p.securityAngle || p.subtitle)}</span>
         <span class="slide__go">Open case file <svg class="ico"><use href="#i-e"/></svg></span>
       </span>
     </button>`;
   }).join('');
 }
 
-function renderRows(filter = 'all') {
-  const list = data().filter((p) => filter === 'all' || p.affiliation === filter);
+let showEarlier = false;
+let currentFilter = 'all';
+
+function renderRows(filter = currentFilter) {
+  currentFilter = filter;
+  const inFilter = data().filter((p) => filter === 'all' || p.affiliation === filter);
+  const list = inFilter.filter((p) => filter !== 'all' || showEarlier || !EARLIER.has(p.id));
+  const more = $('#rows-more');
+  const hidden = inFilter.length - list.length;
+  more.hidden = hidden === 0;
+  more.textContent = `Show ${hidden} earlier project${hidden === 1 ? '' : 's'}`;
   $('#rows').innerHTML = list.map((p, i) => {
     const t = TYPE_COVER[p.id];
     return `<li><button type="button" class="row" data-case="${esc(p.id)}">
@@ -76,31 +90,6 @@ function initFilters() {
     $$('.filter', host).forEach((x) => x.setAttribute('aria-pressed', x === b));
     renderRows(b.dataset.filter);
   });
-}
-
-// Cursor-following preview for the index on pointer devices.
-function initPeek() {
-  if (!matchMedia('(hover: hover) and (min-width: 900px)').matches || reducedMotion || !window.gsap) return;
-  const peek = $('#peek');
-  gsap.set(peek, { xPercent: 12, yPercent: -55 });
-  const x = gsap.quickTo(peek, 'x', { duration: 0.5, ease: 'power3' });
-  const y = gsap.quickTo(peek, 'y', { duration: 0.5, ease: 'power3' });
-  let current = null;
-  const rows = $('#rows');
-  rows.addEventListener('pointermove', (e) => {
-    // Keep the preview on screen and clear of the top bar.
-    x(Math.min(e.clientX, innerWidth - peek.offsetWidth * 1.12 - 24));
-    y(gsap.utils.clamp(peek.offsetHeight * 0.55 + 72, innerHeight - peek.offsetHeight * 0.45 - 16, e.clientY));
-    const row = e.target.closest('.row');
-    const id = row?.dataset.case;
-    if (id === current) return;
-    current = id;
-    if (!id) return;
-    const p = data().find((v) => v.id === id);
-    peek.innerHTML = TYPE_COVER[id] ? typeCover(TYPE_COVER[id]) : `<img src="${esc(opt(p.image))}" alt="">`;
-    gsap.to(peek, { autoAlpha: 1, scale: 1, duration: 0.3 });
-  });
-  rows.addEventListener('pointerleave', () => { current = null; gsap.to(peek, { autoAlpha: 0, duration: 0.25 }); });
 }
 
 /* ---------- Case file ---------- */
@@ -146,11 +135,18 @@ function caseHTML(p, idx) {
       </dl>
       ${actions ? `<div class="case__actions">${actions}</div>` : ''}
       ${viewer}
+      ${p.securityAngle ? `<p class="angle">${esc(p.securityAngle)}</p>` : ''}
       <h3>Brief</h3>
       <p class="case__lead">${esc(p.fullDescription.trim())}</p>
+      ${p.audit ? `<h3>What my audit found</h3>
+      <div class="audit-note"><p>${esc(p.audit.note)}</p>
+        <button type="button" class="link-btn" data-writeup="${esc(p.audit.writeup)}">Read the audit <svg class="ico"><use href="#i-e"/></svg></button></div>` : ''}
       ${hasTool(p) ? `<h3>Try it here</h3><div id="case-tool"></div>` : ''}
       <h3>Highlights</h3>
       <ul class="case__list">${p.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
+      ${p.attackPlan?.length ? `<h3>How I'd attack it today</h3>
+      <p class="case__note">A test plan from what I know now, not work I have already done on this system.</p>
+      <ul class="case__list">${p.attackPlan.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
       ${p.architecture && Object.keys(p.architecture).length ? `<h3>Architecture</h3>
       <dl class="arch">${Object.entries(p.architecture).map(([k, v]) => `<div><dt>${esc(humanize(k))}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>` : ''}
       <h3>Stack</h3>
@@ -197,11 +193,67 @@ function fill(p) {
   };
 }
 
-export function openCase(id) {
-  const p = data().find((x) => x.id === id);
-  if (!p) return;
-  fill(p);
-  history.replaceState(null, '', `#case/${id}`);
+const writeups = () => (window.WRITEUPS_DATA || []).filter((w) => !w.draft);
+const sevClass = (s) => `sev sev--${esc(String(s).toLowerCase())}`;
+
+function sectionHTML(s) {
+  return `<h3>${esc(s.heading)}</h3>
+    ${(s.text || []).map((t) => `<p class="case__lead">${esc(t)}</p>`).join('')}
+    ${s.list ? `<ul class="case__list">${s.list.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>` : ''}
+    ${s.code ? `<pre class="case__code"><code>${esc(s.code)}</code></pre>` : ''}`;
+}
+
+function findingHTML(f) {
+  return `<article class="finding">
+    <div class="finding__head"><span class="${sevClass(f.severity)}">${esc(f.severity)}</span><h4>${esc(f.title)}</h4></div>
+    ${f.url ? `<a class="finding__where" href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.where)}</a>` : `<p class="finding__where">${esc(f.where)}</p>`}
+    ${f.evidence ? `<pre class="case__code"><code>${esc(f.evidence)}</code></pre>` : ''}
+    ${f.result ? `<pre class="case__code case__code--out"><code>${esc(f.result)}</code></pre>` : ''}
+    <dl><dt>Impact</dt><dd>${esc(f.impact)}</dd><dt>Fix</dt><dd>${esc(f.fix)}</dd></dl>
+  </article>`;
+}
+
+function writeupHTML(w) {
+  return `
+    <div class="case__top">
+      <span class="case__crumb mono">${esc(w.type)} &middot; ${esc(w.date)}</span>
+      <button type="button" class="case__close" data-close aria-label="Close writeup"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="case__body">
+      <h2 id="case-title">${esc(w.title)}</h2>
+      <p class="case__sub">${esc(w.summary)}</p>
+      <ul class="tags">${(w.tags || []).map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
+      ${(w.sections || []).map(sectionHTML).join('')}
+      ${w.findings?.length ? `<h3>Findings (${w.findings.length})</h3>${w.findings.map(findingHTML).join('')}` : ''}
+      ${(w.closing || []).map(sectionHTML).join('')}
+      ${w.refs?.length ? `<h3>References</h3><ul class="case__list">${w.refs.map((r) => `<li><a class="finding__where" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.label)}</a></li>`).join('')}</ul>` : ''}
+    </div>`;
+}
+
+export function renderWriteups() {
+  const host = $('#writeups');
+  const list = writeups();
+  // No published writeups: hide the section and its links rather than showing an empty shelf.
+  if (!list.length) {
+    $('#findings').remove();
+    $$('a[href="#findings"]').forEach((a) => a.remove());
+    return;
+  }
+  host.innerHTML = list.map((w) => {
+    const counts = ['High', 'Medium', 'Low'].map((sev) => [sev, (w.findings || []).filter((f) => f.severity === sev).length]).filter(([, n]) => n);
+    return `<button type="button" class="writeup" data-writeup="${esc(w.id)}" data-reveal>
+      <span class="writeup__meta mono">${esc(w.type)}<span>${esc(w.date)}</span></span>
+      <span>
+        <span class="writeup__title">${esc(w.title)}</span>
+        <span class="writeup__sum">${esc(w.summary)}</span>
+        ${counts.length ? `<span class="writeup__count">${counts.map(([sev, n]) => `<span class="${sevClass(sev)}">${n} ${esc(sev)}</span>`).join('')}</span>` : ''}
+      </span>
+      <span class="writeup__go">Read <svg class="ico"><use href="#i-e"/></svg></span>
+    </button>`;
+  }).join('');
+}
+
+function revealPanel() {
   if (dlg.open) return;
   opener = document.activeElement;
   lockPage(true);
@@ -211,6 +263,28 @@ export function openCase(id) {
     animate(panel, { x: ['100%', '0%'] }, { type: 'spring', stiffness: 210, damping: 30 });
     animate(dlg, { opacity: [0, 1] }, { duration: 0.25 });
   }
+}
+
+export function openWriteup(id) {
+  const w = writeups().find((x) => x.id === id);
+  if (!w) return;
+  teardown?.();
+  teardown = null;
+  panel.onclick = null;
+  dlg.onkeydown = null;
+  panel.innerHTML = writeupHTML(w);
+  panel.scrollTop = 0;
+  history.replaceState(null, '', `#writeup/${id}`);
+  revealPanel();
+}
+
+export function openCase(id) {
+  const p = data().find((x) => x.id === id);
+  if (!p) return;
+  fill(p);
+  history.replaceState(null, '', `#case/${id}`);
+  if (dlg.open) return;
+  revealPanel();
 }
 
 function closeCase() {
@@ -230,33 +304,43 @@ function closeCase() {
 export function initWork() {
   dlg = $('#case');
   panel = $('#case-panel');
+  window.PROJECTS_DATA?.sort((a, b) => ORDER.indexOf(a.id) - ORDER.indexOf(b.id));
+  const rows = $('#rows');
+  const more = document.createElement('button');
+  more.type = 'button';
+  more.id = 'rows-more';
+  more.className = 'rows-more';
+  more.addEventListener('click', () => { showEarlier = true; renderRows(); });
+  rows.after(more);
   renderSelected();
   initFilters();
   renderRows();
-  initPeek();
 
   document.addEventListener('click', (e) => {
     const trigger = e.target.closest('[data-case]');
     if (trigger) { openCase(trigger.dataset.case); return; }
+    const report = e.target.closest('[data-writeup]');
+    if (report) { openWriteup(report.dataset.writeup); return; }
     if (e.target.closest('[data-close]')) closeCase();
   });
   dlg.addEventListener('cancel', (e) => { e.preventDefault(); closeCase(); });
   dlg.addEventListener('click', (e) => { if (e.target === dlg) closeCase(); });
 
-  const m = location.hash.match(/^#case\/(.+)$/);
-  if (m) openCase(decodeURIComponent(m[1]));
+  const m = location.hash.match(/^#(case|writeup)\/(.+)$/);
+  if (m) (m[1] === 'case' ? openCase : openWriteup)(decodeURIComponent(m[2]));
 }
 
 export function renderCerts() {
   const certs = window.CERTIFICATES_DATA || [];
-  $('#certs-top').innerHTML = certs.filter((c) => c.highlight).map((c) => `
+  const shown = certs.filter((c) => !c.hidden);
+  $('#certs-top').innerHTML = shown.filter((c) => c.highlight).map((c) => `
     <a class="cert-top" href="${esc(c.fileUrl)}" target="_blank" rel="noopener" data-reveal>
       <span class="cert-top__meta mono"><span>${esc(c.issuer)}</span><span>${esc(c.date)}</span></span>
       <h3>${esc(c.title)}</h3>
       <p>${esc(c.desc)}</p>
       <span class="cert-top__foot mono"><span>${esc(c.tag)}</span><svg class="ico"><use href="#i-ne"/></svg></span>
     </a>`).join('');
-  $('#certs').innerHTML = certs.filter((c) => !c.highlight).map((c) => `
+  $('#certs').innerHTML = shown.filter((c) => !c.highlight).map((c) => `
     <li data-reveal><a class="cert" href="${esc(c.fileUrl)}" target="_blank" rel="noopener">
       <span class="cert__date mono">${esc(c.date)}</span>
       <span class="cert__title">${esc(c.title)}</span>

@@ -1,7 +1,7 @@
 // Scroll choreography (GSAP + ScrollTrigger + SplitText + Lenis) and page-level interactions.
 import { animate, stagger } from '../assets/vendor/motion.subset.min.js';
 import { $, $$, toast, lockPage, reducedMotion, setLenis, getLenis, scrollToTarget } from './util.js';
-import { initWork, renderCerts } from './work.js';
+import { initWork, renderCerts, renderWriteups } from './work.js';
 import { initConsole } from './console.js';
 
 const { gsap, ScrollTrigger, SplitText, Lenis } = window;
@@ -30,13 +30,13 @@ function playBoot() {
   try { sessionStorage.setItem('booted', '1'); } catch (e) { /* storage blocked */ }
   const log = $('#boot-log');
   const addr = $('#boot-addr');
-  const lines = ['POWER GOOD', 'CLOCK LOCKED', 'MAP 0x00-0x80 OK', 'SECURE BOOT: ME'];
+  const lines = ['POWER GOOD', 'CLOCK LOCKED', 'MAP 0x00-0x90 OK', 'SECURE BOOT: ME'];
   const counter = { v: 0 };
   return new Promise((resolve) => {
     gsap.timeline({ onComplete: () => { boot.remove(); document.documentElement.classList.remove('js-boot'); } })
-      .to(counter, { v: 128, duration: 0.85, ease: 'power2.inOut', onUpdate: () => {
+      .to(counter, { v: 144, duration: 0.85, ease: 'power2.inOut', onUpdate: () => {
         addr.textContent = '0x' + Math.round(counter.v).toString(16).toUpperCase().padStart(2, '0');
-        log.textContent = lines.slice(0, Math.ceil((counter.v / 128) * lines.length)).join('\n');
+        log.textContent = lines.slice(0, Math.ceil((counter.v / 144) * lines.length)).join('\n');
       } })
       .add(resolve, '+=0.05')
       .to(boot, { yPercent: -100, duration: 0.65, ease: 'expo.inOut' }, '+=0.05');
@@ -173,8 +173,6 @@ function initReveals() {
     });
   });
 
-  const honor = $('.honor__big');
-  if (honor) gsap.from(honor, { yPercent: 18, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: honor, start: 'top 85%', once: true } });
 }
 
 /* ---------- Horizontal work gallery ---------- */
@@ -247,7 +245,7 @@ function initChrome() {
     const y = scrollY;
     bar.classList.toggle('is-solid', y > 40);
     const max = document.documentElement.scrollHeight - innerHeight;
-    pc.textContent = '0x' + Math.round((y / Math.max(max, 1)) * 128).toString(16).toUpperCase().padStart(2, '0');
+    pc.textContent = '0x' + Math.round((y / Math.max(max, 1)) * 144).toString(16).toUpperCase().padStart(2, '0');
     if (!reducedMotion && !document.body.classList.contains('locked')) {
       const hide = y > last + 4 && y > innerHeight * 0.8;
       const show = y < last - 4 || y < 80;
@@ -301,7 +299,7 @@ function initMenu() {
   $$('nav a', menu).forEach((a) => a.addEventListener('click', close));
 }
 
-/* ---------- Copy + magnetic buttons ---------- */
+/* ---------- Copy to clipboard ---------- */
 function initMicro() {
   document.addEventListener('click', async (e) => {
     const b = e.target.closest('[data-copy]');
@@ -314,15 +312,6 @@ function initMicro() {
     }
   });
 
-  if (reducedMotion || !matchMedia('(hover: hover)').matches) return;
-  const spring = { type: 'spring', stiffness: 260, damping: 18, mass: 0.6 };
-  $$('.magnet').forEach((el) => {
-    el.addEventListener('pointermove', (e) => {
-      const r = el.getBoundingClientRect();
-      animate(el, { x: (e.clientX - r.left - r.width / 2) * 0.22, y: (e.clientY - r.top - r.height / 2) * 0.32 }, spring);
-    });
-    el.addEventListener('pointerleave', () => animate(el, { x: 0, y: 0 }, spring));
-  });
 }
 
 /* ---------- Start ---------- */
@@ -344,6 +333,7 @@ async function startBoardScene() {
 async function start() {
   $('#year').textContent = new Date().getFullYear();
   renderCerts();
+  renderWriteups();
   initConsole();
   initMenu();
 
@@ -375,7 +365,7 @@ async function start() {
   heroIntro(scene);
   ScrollTrigger.refresh();
   addEventListener('load', () => ScrollTrigger.refresh());
-  if (location.hash && !location.hash.startsWith('#case/') && $(location.hash)) getLenis()?.scrollTo(location.hash, { immediate: true });
+  if (location.hash && !/^#(case|writeup)\//.test(location.hash) && $(location.hash)) getLenis()?.scrollTo(location.hash, { immediate: true });
 }
 
 start().catch((err) => {
