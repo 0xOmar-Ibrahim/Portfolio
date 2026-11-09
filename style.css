@@ -240,11 +240,15 @@ strong { font-weight: 600; color: var(--fg); }
 .link-btn:hover { color: var(--fog); }
 
 /* ---- Markdown writeups ---- */
-.prose { margin-top: 2rem; max-width: 72ch; font-size: 1.04rem; line-height: 1.7; color: var(--fog); overflow-wrap: break-word; }
+/* Fills the panel at any width. ".case .prose" outranks the panel's own h2/h3 styles. */
+.prose { margin-top: 2rem; width: 100%; max-width: none; font-size: 1.04rem; line-height: 1.7; color: var(--fog); overflow-wrap: break-word; }
 .prose > * + * { margin-top: 1.05em; }
-.prose h1, .prose h2 { font: 700 clamp(1.45rem, 2.4vw, 2.1rem)/1.1 var(--display); font-variation-settings: "wdth" 84; margin-top: 2.2em; padding-bottom: .4rem; border-bottom: 1px solid var(--line); }
-.prose h3 { font: 700 clamp(1.15rem, 1.8vw, 1.45rem)/1.15 var(--display); font-variation-settings: "wdth" 86; margin-top: 1.8em; }
-.prose h4 { font: 400 .72rem/1.5 var(--mono); text-transform: uppercase; color: var(--enig); margin-top: 1.6em; }
+.prose > :first-child { margin-top: 0; }
+.case .case__sub--wide { max-width: none; }
+.case .prose h1, .case .prose h2 { font: 700 clamp(1.45rem, 2.4vw, 2.1rem)/1.15 var(--display); font-variation-settings: "wdth" 84; text-transform: none; letter-spacing: 0; color: var(--fog); margin: 2.2em 0 0; padding: 0 0 .45rem; border-bottom: 1px solid var(--line); }
+.case .prose h3 { font: 700 clamp(1.15rem, 1.8vw, 1.45rem)/1.2 var(--display); font-variation-settings: "wdth" 86; text-transform: none; color: var(--fog); margin: 1.8em 0 0; padding: 0; border: 0; }
+.case .prose h4 { font: 400 .72rem/1.5 var(--mono); text-transform: uppercase; color: var(--enig); margin: 1.6em 0 0; padding: 0; border: 0; }
+.case .prose h1 + *, .case .prose h2 + *, .case .prose h3 + *, .case .prose h4 + * { margin-top: .8em; }
 .prose a { color: var(--enig); text-decoration: underline; text-underline-offset: 3px; }
 .prose a:hover { color: var(--fog); }
 .prose strong { color: var(--fog); }

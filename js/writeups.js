@@ -79,7 +79,7 @@ export async function openPost(slug) {
     </div>
     <div class="case__body">
       <h2 id="case-title">${esc(w.title)}</h2>
-      ${w.summary ? `<p class="case__sub">${esc(w.summary)}</p>` : ''}
+      ${w.summary && !w.autoSummary ? `<p class="case__sub case__sub--wide">${esc(w.summary)}</p>` : ''}
       ${w.tags.length ? `<ul class="tags">${w.tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
       <article class="prose" id="prose">${html}</article>
     </div>`, `#writeups/${slug}`, (panel) => {

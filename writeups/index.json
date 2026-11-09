@@ -6,7 +6,8 @@
       "title": "ReactOOPS",
       "date": "2026-11-09",
       "type": "Web",
-      "summary": "A Next.js application vulnerable to **CVE-2025-55182** — a critical Remote Code Execution flaw in Next.js Server Actions that allows unauthenticated attackers to execute arbitrary commands on the server.",
+      "summary": "A Next.js application vulnerable to CVE-2025-55182 — a critical Remote Code Execution flaw in Next.js Server Actions that allows unauthenticated attackers to execute arbitrary commands on the server.",
+      "autoSummary": false,
       "tags": [
         "Linux",
         "Web",
@@ -23,6 +24,7 @@
       "date": "2026-11-09",
       "type": "Web",
       "summary": "A browser-based terminal adventure game. The goal is to bypass client-side input validation and interact with the backend API directly to extract the flag.",
+      "autoSummary": false,
       "tags": [
         "Linux",
         "Web",

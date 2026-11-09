@@ -30,7 +30,16 @@ function parse(src) {
   return { meta, body };
 }
 
-const plain = (md) => md.replace(/```[\s\S]*?```/g, ' ').replace(/!\[[^\]]*\]\([^)]*\)/g, ' ').replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/[#>*_`|~-]/g, ' ').replace(/\s+/g, ' ').trim();
+// Markdown to plain text for cards: drops formatting marks but keeps text like "CVE-2025-55182" intact.
+const plain = (md) => String(md)
+  .replace(/```[\s\S]*?```/g, ' ')
+  .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+  .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/^\s*(#{1,6}|>|[-*+]|\d+\.)\s+/gm, '')
+  .replace(/\*\*|__|`|~~/g, '')
+  .replace(/(^|\s)[*_](\S[^*_]*\S|\S)[*_](?=\s|[.,;:!?]|$)/g, '$1$2')
+  .replace(/\s+/g, ' ')
+  .trim();
 
 const items = [];
 for (const file of fs.readdirSync(DIR).filter((f) => f.endsWith('.md')).sort()) {
@@ -41,11 +50,11 @@ for (const file of fs.readdirSync(DIR).filter((f) => f.endsWith('.md')).sort()) 
   if (!title) { warn(file, 'skipped: add a "title:" line or a "# Heading".'); continue; }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(String(meta.date || ''))) { warn(file, 'skipped: add "date: YYYY-MM-DD" at the top.'); continue; }
   const firstPara = body.split(/\r?\n\s*\r?\n/).map((b) => b.trim()).find((b) => b && !/^(#|```|!\[|\||>|-|\*|\d+\.)/.test(b)) || '';
-  const summary = meta.summary || (plain(firstPara).slice(0, 220) + (plain(firstPara).length > 220 ? '…' : ''));
+  const summary = meta.summary ? plain(meta.summary) : (plain(firstPara).slice(0, 220) + (plain(firstPara).length > 220 ? '…' : ''));
   const words = plain(body).split(' ').filter(Boolean).length;
   items.push({
     slug, file, title: String(title).trim(), date: meta.date,
-    type: meta.type || 'Writeup', summary, tags: Array.isArray(meta.tags) ? meta.tags : [],
+    type: meta.type || 'Writeup', summary, autoSummary: !meta.summary, tags: Array.isArray(meta.tags) ? meta.tags : [],
     draft: meta.draft === true, minutes: Math.max(1, Math.round(words / 200)),
   });
 }

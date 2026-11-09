@@ -272,7 +272,8 @@ export function showInPanel(html, hash, onReady) {
   dlg.onkeydown = null;
   panel.innerHTML = html;
   panel.scrollTop = 0;
-  onReady?.(panel);
+  // onReady may return a cleanup function, which runs when the panel changes or closes.
+  teardown = onReady?.(panel, dlg) || null;
   history.replaceState(null, '', location.pathname + location.search + hash);
   revealPanel();
 }
