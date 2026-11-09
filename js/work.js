@@ -265,19 +265,6 @@ function revealPanel() {
   }
 }
 
-export function showInPanel(html, hash, onReady) {
-  teardown?.();
-  teardown = null;
-  panel.onclick = null;
-  dlg.onkeydown = null;
-  panel.innerHTML = html;
-  panel.scrollTop = 0;
-  // onReady may return a cleanup function, which runs when the panel changes or closes.
-  teardown = onReady?.(panel, dlg) || null;
-  history.replaceState(null, '', location.pathname + location.search + hash);
-  revealPanel();
-}
-
 export function openWriteup(id) {
   const w = writeups().find((x) => x.id === id);
   if (!w) return;
@@ -314,9 +301,18 @@ function closeCase() {
   animate(panel, { x: '100%' }, { duration: 0.28, ease: [0.4, 0, 1, 1] }).then(done);
 }
 
-export function initWork() {
+// Sets up the side panel. Shared by the home page and writeups.html, safe to call twice.
+export function initPanel() {
+  if (dlg) return;
   dlg = $('#case');
   panel = $('#case-panel');
+  document.addEventListener('click', (e) => { if (e.target.closest('[data-close]')) closeCase(); });
+  dlg.addEventListener('cancel', (e) => { e.preventDefault(); closeCase(); });
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) closeCase(); });
+}
+
+export function initWork() {
+  initPanel();
   window.PROJECTS_DATA?.sort((a, b) => ORDER.indexOf(a.id) - ORDER.indexOf(b.id));
   const rows = $('#rows');
   const more = document.createElement('button');
@@ -333,11 +329,8 @@ export function initWork() {
     const trigger = e.target.closest('[data-case]');
     if (trigger) { openCase(trigger.dataset.case); return; }
     const report = e.target.closest('[data-writeup]');
-    if (report) { openWriteup(report.dataset.writeup); return; }
-    if (e.target.closest('[data-close]')) closeCase();
+    if (report) openWriteup(report.dataset.writeup);
   });
-  dlg.addEventListener('cancel', (e) => { e.preventDefault(); closeCase(); });
-  dlg.addEventListener('click', (e) => { if (e.target === dlg) closeCase(); });
 
   const m = location.hash.match(/^#(case|writeup)\/(.+)$/);
   if (m) (m[1] === 'case' ? openCase : openWriteup)(decodeURIComponent(m[2]));

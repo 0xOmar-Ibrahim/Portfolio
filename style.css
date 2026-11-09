@@ -240,15 +240,13 @@ strong { font-weight: 600; color: var(--fg); }
 .link-btn:hover { color: var(--fog); }
 
 /* ---- Markdown writeups ---- */
-/* Fills the panel at any width. ".case .prose" outranks the panel's own h2/h3 styles. */
-.prose { margin-top: 2rem; width: 100%; max-width: none; font-size: 1.04rem; line-height: 1.7; color: var(--fog); overflow-wrap: break-word; }
+.prose { font-size: 1.05rem; line-height: 1.75; color: var(--fog); overflow-wrap: break-word; }
 .prose > * + * { margin-top: 1.05em; }
 .prose > :first-child { margin-top: 0; }
-.case .case__sub--wide { max-width: none; }
-.case .prose h1, .case .prose h2 { font: 700 clamp(1.45rem, 2.4vw, 2.1rem)/1.15 var(--display); font-variation-settings: "wdth" 84; text-transform: none; letter-spacing: 0; color: var(--fog); margin: 2.2em 0 0; padding: 0 0 .45rem; border-bottom: 1px solid var(--line); }
-.case .prose h3 { font: 700 clamp(1.15rem, 1.8vw, 1.45rem)/1.2 var(--display); font-variation-settings: "wdth" 86; text-transform: none; color: var(--fog); margin: 1.8em 0 0; padding: 0; border: 0; }
-.case .prose h4 { font: 400 .72rem/1.5 var(--mono); text-transform: uppercase; color: var(--enig); margin: 1.6em 0 0; padding: 0; border: 0; }
-.case .prose h1 + *, .case .prose h2 + *, .case .prose h3 + *, .case .prose h4 + * { margin-top: .8em; }
+.prose h1, .prose h2 { font: 700 clamp(1.5rem, 2.6vw, 2.3rem)/1.15 var(--display); font-variation-settings: "wdth" 84; text-transform: none; letter-spacing: 0; color: var(--fog); margin: 2.2em 0 0; padding: 0 0 .45rem; border-bottom: 1px solid var(--line); }
+.prose h3 { font: 700 clamp(1.2rem, 1.9vw, 1.55rem)/1.2 var(--display); font-variation-settings: "wdth" 86; text-transform: none; color: var(--fog); margin: 1.8em 0 0; padding: 0; border: 0; }
+.prose h4 { font: 400 .72rem/1.5 var(--mono); text-transform: uppercase; color: var(--enig); margin: 1.6em 0 0; padding: 0; border: 0; }
+.prose h1 + *, .prose h2 + *, .prose h3 + *, .prose h4 + * { margin-top: .8em; }
 .prose a { color: var(--enig); text-decoration: underline; text-underline-offset: 3px; }
 .prose a:hover { color: var(--fog); }
 .prose strong { color: var(--fog); }
@@ -265,7 +263,7 @@ strong { font-weight: 600; color: var(--fg); }
 .prose pre code { font: inherit; color: var(--fog); }
 .prose__copy { position: absolute; top: .4rem; right: .4rem; min-height: 32px; padding: 0 .6rem; border: 1px solid var(--line); background: var(--mask-900); color: var(--fog-dim); font-size: .6rem; opacity: 0; transition: opacity .2s, color .2s; }
 .prose pre:hover .prose__copy, .prose__copy:focus-visible { opacity: 1; }
-@media (hover: none) { .prose__copy { opacity: 1; } }
+@media (hover: none) { .prose__copy { opacity: 1; } .prose pre { padding-top: 2.7rem; } }
 .prose__copy:hover { color: var(--enig); border-color: var(--enig); }
 .prose img { max-width: 100%; height: auto; border: 1px solid var(--line); }
 .prose hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
@@ -274,6 +272,41 @@ strong { font-weight: 600; color: var(--fg); }
 .prose th, .prose td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
 .prose th { font: 400 .64rem/1.4 var(--mono); text-transform: uppercase; color: var(--fog-dim); }
 .writeup__title .sev { vertical-align: middle; margin-right: .3rem; }
+
+/* ---- Writeups page (writeups.html) ---- */
+.subpage { --rail: 0px; min-height: 100vh; display: flex; flex-direction: column; }
+.subpage main { flex: 1; }
+.wp { padding-top: clamp(96px, 12vw, 140px); }
+.wp-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.wp-search { display: inline-flex; align-items: center; gap: .6rem; flex: 1; min-width: min(100%, 320px); max-width: 460px; padding: .7rem .9rem; border: 1px solid var(--line); color: var(--dim); transition: border-color .2s; }
+.wp-search:focus-within { border-color: var(--enig); }
+.wp-search .ico { width: 1.1rem; height: 1.1rem; flex: none; }
+.wp-search input { flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: var(--fg); font: inherit; }
+.wp-search input::placeholder { color: var(--fog-dim); }
+.wp-count { color: var(--fog-dim); white-space: nowrap; }
+.wp-filters { margin-bottom: 1.5rem; }
+.wp-none { padding: 2.5rem 0; color: var(--dim); }
+.wp #wp-empty { padding: 2rem 0; color: var(--dim); }
+.wp #wp-empty a, .wp-none .link-btn { color: var(--enig); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Single writeup page (writeup.html) ---- */
+.reader-page main { padding: clamp(92px, 12vw, 132px) var(--g) 0; }
+.article { max-width: 60rem; margin: 0 auto; padding-bottom: clamp(3rem, 8vw, 6rem); }
+.article--msg { min-height: 50vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1rem; }
+.article__back { display: inline-flex; align-items: center; gap: .45em; color: var(--fog-dim); margin-bottom: 2rem; transition: color .2s; }
+.article__back:hover { color: var(--enig); }
+.article__head { padding-bottom: clamp(1.4rem, 3vw, 2rem); margin-bottom: clamp(1.8rem, 4vw, 2.8rem); border-bottom: 1px solid var(--line); }
+.article__kicker { color: var(--enig); }
+.article__title { font: 800 clamp(2.1rem, 6vw, 4rem)/1.04 var(--display); font-variation-settings: "wdth" 80; text-transform: none; letter-spacing: -.005em; margin: .6rem 0 0; }
+.article__sum { color: var(--dim); font-size: clamp(1.08rem, 1.6vw, 1.3rem); line-height: 1.5; max-width: 66ch; margin-top: 1rem; }
+.article .tags { margin-top: 1.2rem; }
+.article__pager { display: flex; justify-content: space-between; gap: 1.5rem; margin-top: clamp(3rem, 7vw, 5rem); padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.article__pager a { display: flex; align-items: center; gap: .6em; max-width: 48%; color: var(--fog); transition: color .2s; }
+.article__pager a:hover { color: var(--enig); }
+.article__pager a:last-child { margin-left: auto; text-align: right; }
+.article__pager .mono { display: block; color: var(--fog-dim); font-size: .62rem; }
+.article__pager-t { display: block; font-weight: 600; line-height: 1.2; margin-top: .15rem; }
+.article__pager .ico { flex: none; }
 
 /* ---- Work: selected gallery ---- */
 .work { background: var(--mask-950); }
