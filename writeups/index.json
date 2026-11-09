@@ -1,3 +1,35 @@
 {
-  "items": []
+  "items": [
+    {
+      "slug": "htb-reactoops-walkthrough",
+      "file": "HTB ReactOOPS Walkthrough.md",
+      "title": "ReactOOPS",
+      "date": "2026-11-09",
+      "type": "Web",
+      "summary": "A Next.js application vulnerable to **CVE-2025-55182** — a critical Remote Code Execution flaw in Next.js Server Actions that allows unauthenticated attackers to execute arbitrary commands on the server.",
+      "tags": [
+        "Linux",
+        "Web",
+        "PrivEsc",
+        "RCE"
+      ],
+      "draft": false,
+      "minutes": 2
+    },
+    {
+      "slug": "htb-terminal-adventure-walkthrough",
+      "file": "HTB Terminal Adventure Walkthrough.md",
+      "title": "Terminal Adventure",
+      "date": "2026-11-09",
+      "type": "Web",
+      "summary": "A browser-based terminal adventure game. The goal is to bypass client-side input validation and interact with the backend API directly to extract the flag.",
+      "tags": [
+        "Linux",
+        "Web",
+        "PrivEsc"
+      ],
+      "draft": false,
+      "minutes": 1
+    }
+  ]
 }
