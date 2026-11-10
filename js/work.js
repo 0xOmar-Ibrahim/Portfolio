@@ -3,10 +3,10 @@ import { animate } from '../assets/vendor/motion.subset.min.js';
 import { $, $$, esc, lockPage, reducedMotion } from './util.js';
 import { hasTool, mountTool } from './tools.js';
 
-const SELECTED = ['tryhackme-ctf', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'morse-code-x86', 'esp32-21-relay-controller'];
+const SELECTED = ['tryhackme-ctf', 'hexicon', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'morse-code-x86', 'esp32-21-relay-controller'];
 
 // Index order: security first, then systems with a security angle, then the rest.
-const ORDER = ['tryhackme-ctf', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'electronics-mgmt-rbac', 'labstar-elevator-control', 'sensor-telemetry-pipeline', 'bank-management-system', 'morse-code-x86', 'keygarden-pass-gen', 'esp32-21-relay-controller', 'voice-smart-home', 'employee-management-c', 'cinema-management-c', 'number-system-converter'];
+const ORDER = ['tryhackme-ctf', 'hexicon', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'electronics-mgmt-rbac', 'labstar-elevator-control', 'sensor-telemetry-pipeline', 'bank-management-system', 'morse-code-x86', 'keygarden-pass-gen', 'esp32-21-relay-controller', 'voice-smart-home', 'employee-management-c', 'cinema-management-c', 'number-system-converter'];
 
 // Earlier work, folded away under the "All" view so the first impression stays on security.
 const EARLIER = new Set(['cinema-management-c', 'number-system-converter']);
@@ -115,8 +115,10 @@ function caseHTML(p, idx) {
     </div>` : '';
 
   const repo = (p.github || '').trim();
+  const live = (p.liveUrl || '').trim();
   const actions = [
-    repo && `<a class="btn btn--gold" href="${esc(repo)}" target="_blank" rel="noopener">${isPdf(repo) ? `<span>Project book (PDF)</span><svg class="ico"><use href="#i-ne"/></svg>` : `<svg class="ico"><use href="#i-gh"/></svg><span>Source on GitHub</span>`}</a>`,
+    live && `<a class="btn btn--gold" href="${esc(live)}" target="_blank" rel="noopener"><span>Visit the live site</span><svg class="ico"><use href="#i-ne"/></svg></a>`,
+    repo && `<a class="btn ${live ? 'btn--line' : 'btn--gold'}" href="${esc(repo)}" target="_blank" rel="noopener">${isPdf(repo) ? `<span>Project book (PDF)</span><svg class="ico"><use href="#i-ne"/></svg>` : `<svg class="ico"><use href="#i-gh"/></svg><span>Source on GitHub</span>`}</a>`,
     (p.videoUrl || '').trim() && `<a class="btn btn--line" href="${esc(p.videoUrl)}" target="_blank" rel="noopener"><span>Watch demo video</span><svg class="ico"><use href="#i-ne"/></svg></a>`,
   ].filter(Boolean).join('');
 

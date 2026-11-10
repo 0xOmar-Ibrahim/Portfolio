@@ -55,6 +55,60 @@ var PROJECTS_DATA = [
     "securityAngle": "Most of my offensive practice happens here: recon, exploitation and privilege escalation against live targets, under time pressure."
   },
   {
+    "id": "hexicon",
+    "title": "Hexicon — The Open Lexicon of Security",
+    "subtitle": "A multilingual, community-curated security library with 1,000+ CVE field notes",
+    "affiliation": "Self-Employed",
+    "affiliationName": "Open-source project",
+    "featured": true,
+    "badge": "Open Source / Data & Web",
+    "image": "assets/projs-imgs/hexicon-home.png",
+    "photos": [
+      "assets/projs-imgs/hexicon-home.png",
+      "assets/projs-imgs/hexicon-domains.png",
+      "assets/projs-imgs/hexicon-poster.png"
+    ],
+    "videoUrl": "",
+    "github": "https://github.com/0xOmar-Ibrahim/Hexicon",
+    "liveUrl": "https://hexicon-murex.vercel.app",
+    "tags": [
+      "Node.js",
+      "YAML",
+      "Static Site",
+      "CI/CD",
+      "JSON Schema",
+      "CVE",
+      "CISA KEV",
+      "i18n",
+      "Open Source"
+    ],
+    "date": "2026",
+    "role": "Creator & Maintainer",
+    "summary": "An open library that maps the whole field of cybersecurity: 533 tagged learning resources across 14 domains and 1,000+ curated CVE pages for the most actively exploited vulnerabilities, in five languages. Built as a static site generated from validated YAML, with CI and a weekly CVE sync.",
+    "fullDescription": "Hexicon is my answer to the 'one giant Markdown list that slowly rots' problem in security. Every resource and every CVE is a small, schema-validated YAML file, and Node scripts build those into a fast static site that is searchable, filterable and translated into five languages (including right-to-left Arabic). A weekly GitHub Action keeps the CVE data current from NVD, CISA KEV and FIRST EPSS, and CI rejects any contribution that fails the schema or links to a dead page. It is free and open source under MIT for the code and CC BY 4.0 for the content.",
+    "securityAngle": "I built the reference I wanted as a pentester: 1,000 actively-exploited CVEs ranked by real-world exploitability, each with advisories, detections and patches in one place.",
+    "highlights": [
+      "Curated 1,000+ CVE field notes for the most actively exploited vulnerabilities, ranked by EPSS with CVSS, CWE and ransomware flags.",
+      "Catalogued 533 learning resources across 14 security domains, each tagged by level, cost and language and link-checked in CI.",
+      "Built the whole site as static files generated from YAML — searchable and filterable, with no backend to attack.",
+      "Automated a weekly job that syncs CVE metadata from NVD, CISA KEV and FIRST EPSS.",
+      "Shipped the interface and content in five languages, including right-to-left Arabic.",
+      "Validated every contribution against JSON Schemas in CI, so malformed data cannot merge."
+    ],
+    "attackPlan": [
+      "It is a static site built from YAML, so the real surface is the build, not a server: review the CI for a malicious pull request that smuggles script through a crafted YAML field.",
+      "Every resource is a contributed URL; test how links are rendered and checked for stored XSS or SSRF.",
+      "The weekly sync pulls from NVD, CISA KEV and EPSS; check what happens when a feed returns malformed or hostile data.",
+      "Translations are user-contributed; confirm Arabic and RTL strings cannot break out of the template."
+    ],
+    "architecture": {
+      "data": "One YAML file per resource and per CVE, each validated against a JSON Schema in CI.",
+      "build": "Node scripts turn the YAML into a static, searchable site with no runtime backend.",
+      "automation": "A weekly GitHub Action syncs CVE metadata from NVD, CISA KEV and FIRST EPSS.",
+      "i18n": "Interface and descriptions in English, German, French, Arabic (right-to-left) and Russian."
+    }
+  },
+  {
     "id": "ibm-ethical-hacking",
     "title": "IBM Ethical Hacking & Vulnerability Capstone",
     "subtitle": "IBM Cybersecurity Analyst Professional Certification Capstone",
