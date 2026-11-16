@@ -55,6 +55,61 @@ var PROJECTS_DATA = [
     "securityAngle": "Most of my offensive practice happens here: recon, exploitation and privilege escalation against live targets, under time pressure."
   },
   {
+    "id": "ordova",
+    "title": "Ordova — Code Complexity Analyzer",
+    "subtitle": "Reads your code's Big-O, then runs it in a sandbox to check — six languages, a VS Code extension and an API",
+    "affiliation": "Self-Employed",
+    "affiliationName": "Independent product (ordova.tech)",
+    "featured": true,
+    "badge": "Product / Static Analysis & Sandbox",
+    "image": "assets/projs-imgs/ordova-home.png",
+    "photos": [
+      "assets/projs-imgs/ordova-home.png",
+      "assets/projs-imgs/ordova-result.png",
+      "assets/projs-imgs/ordova-accuracy.png"
+    ],
+    "videoUrl": "",
+    "github": "",
+    "liveUrl": "https://ordova.tech",
+    "tags": [
+      "Static Analysis",
+      "AST",
+      "tree-sitter",
+      "Sandboxing",
+      "gVisor",
+      "seccomp",
+      "Python",
+      "Node.js",
+      "VS Code Extension",
+      "REST API"
+    ],
+    "date": "2026",
+    "role": "Creator & Developer",
+    "summary": "A tool that answers 'how fast is this code?' three ways: it reads the Big-O from the source, runs the function in a sandbox to check the estimate against real timings, and proposes faster versions it verifies give the same results. Six languages, with a website, a REST API and a VS Code extension.",
+    "fullDescription": "Ordova reads a function's complexity from its syntax tree — loops, recursion solved as recurrences, amortized graph traversals and two-variable bounds — and explains every result with the exact lines that cause it. It then benchmarks the same function on growing inputs in an isolated sandbox and reports whether the measurements agree with the analysis. An optimizer suggests faster versions; for Python it proves a rewrite returns identical results across edge cases, input distributions and random seeds before showing the measured speed-up. Because it runs code it doesn't trust, the benchmarks happen in a hardened runner — a throwaway Linux user per job, no network, hard limits and gVisor — that a 39-check attack suite hits on every deploy. It ships as a website, a REST API and a VS Code extension, across Python, JavaScript, TypeScript, Java, C++ and Go.",
+    "securityAngle": "The whole thing runs code it cannot trust, so the real engineering is the sandbox — the part that has to survive hostile input the way I spend my time trying to break.",
+    "highlights": [
+      "Derives Big-O (O, Ω, Θ) and space from the code itself — loops, recursion recurrences, amortized DFS/BFS and two-variable bounds — and explains each result with line numbers.",
+      "Checks the estimate by actually running the function on growing inputs in a sandbox, fitting the measured curve, and reporting whether the two agree.",
+      "Suggests faster versions, and for Python proves a rewrite returns the same results across edge cases, input distributions and random seeds before showing the measured speed-up.",
+      "Parses six languages — Python through its own AST, and JavaScript, TypeScript, Java, C++ and Go through tree-sitter.",
+      "Runs untrusted code in a locked-down sandbox: a throwaway Linux user per job, no network (seccomp), hard resource limits and gVisor, probed by a 39-check attack suite in CI.",
+      "Ships as a website, a REST API and a VS Code extension that shows the complexity above every function."
+    ],
+    "attackPlan": [
+      "Escape the sandbox: try to open a network socket or reach the database from benchmarked code — both are blocked at the kernel with seccomp and an internal-only network.",
+      "Read another job's data: each job runs as its own throwaway unprivileged user and is cleaned up after, so there is nothing left to read.",
+      "Stall the service with a pathological parser input — caught by parsing in a separate worker process with a 2-second limit.",
+      "Exhaust resources with a fork bomb or memory spike: hard limits on CPU, memory, processes and file size apply to programs and compilers alike."
+    ],
+    "architecture": {
+      "analysis": "A static analyzer walks the syntax tree (Python ast; tree-sitter for the rest) and builds the cost from loops, calls and recurrences, with a confidence score.",
+      "sandbox": "A separate runner service executes untrusted code with no secrets and no network, a per-job Linux user, seccomp, resource limits and gVisor.",
+      "optimizer": "Rule-based rewrites are verified in the sandbox for identical results before they are timed against the original.",
+      "clients": "A website, a REST API (/api/analyze, /optimize, /compare) and a VS Code extension that is a thin client over the same API."
+    }
+  },
+  {
     "id": "hexicon",
     "title": "Hexicon — The Open Lexicon of Security",
     "subtitle": "A multilingual, community-curated security library with 1,000+ CVE field notes",

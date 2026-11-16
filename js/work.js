@@ -3,10 +3,10 @@ import { animate } from '../assets/vendor/motion.subset.min.js';
 import { $, $$, esc, lockPage, reducedMotion } from './util.js';
 import { hasTool, mountTool } from './tools.js';
 
-const SELECTED = ['tryhackme-ctf', 'hexicon', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'morse-code-x86', 'esp32-21-relay-controller'];
+const SELECTED = ['tryhackme-ctf', 'ordova', 'hexicon', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'morse-code-x86', 'esp32-21-relay-controller'];
 
 // Index order: security first, then systems with a security angle, then the rest.
-const ORDER = ['tryhackme-ctf', 'hexicon', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'electronics-mgmt-rbac', 'labstar-elevator-control', 'sensor-telemetry-pipeline', 'bank-management-system', 'morse-code-x86', 'keygarden-pass-gen', 'esp32-21-relay-controller', 'voice-smart-home', 'employee-management-c', 'cinema-management-c', 'number-system-converter'];
+const ORDER = ['tryhackme-ctf', 'ordova', 'hexicon', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'electronics-mgmt-rbac', 'labstar-elevator-control', 'sensor-telemetry-pipeline', 'bank-management-system', 'morse-code-x86', 'keygarden-pass-gen', 'esp32-21-relay-controller', 'voice-smart-home', 'employee-management-c', 'cinema-management-c', 'number-system-converter'];
 
 // Earlier work, folded away under the "All" view so the first impression stays on security.
 const EARLIER = new Set(['cinema-management-c', 'number-system-converter']);
