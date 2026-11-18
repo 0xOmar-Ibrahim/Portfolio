@@ -173,46 +173,6 @@ var PROJECTS_DATA = [
     }
   },
   {
-    "id": "ibm-ethical-hacking",
-    "title": "IBM Ethical Hacking & Vulnerability Capstone",
-    "subtitle": "IBM Cybersecurity Analyst Professional Certification Capstone",
-    "affiliation": "Self-Employed",
-    "affiliationName": "IBM Professional Capstone",
-    "featured": true,
-    "badge": "IBM Capstone Project",
-    "image": "assets/images/pentest-lab.jpg",
-    "photos": [
-      "assets/images/pentest-lab.jpg"
-    ],
-    "videoUrl": "",
-    "tags": [
-      "OpenVAS",
-      "Metasploit",
-      "CVE Analysis",
-      "Vulnerability Assessment",
-      "CVSS Scoring",
-      "Hardening"
-    ],
-    "date": "Jan 2026",
-    "role": "Security Analyst (course capstone)",
-    "summary": "End-to-end vulnerability assessment and exploitation engagement utilizing OpenVAS and Metasploit. Analyzed critical CVE findings, executed controlled lab exploits, and produced an executive remediation plan.",
-    "fullDescription": "As part of the IBM Cybersecurity Analyst Professional Specialization (14 courses), this capstone simulated an enterprise network penetration audit. The project encompassed initial reconnaissance, automated and manual vulnerability scanning with Greenbone/OpenVAS, validation through Metasploit modules, and formulation of remediation playbooks.",
-    "highlights": [
-      "Ran automated vulnerability scans across lab subnets with OpenVAS.",
-      "Prioritised CVEs by real-world exploitability and mapped results to MITRE ATT&CK.",
-      "Validated findings with Metasploit in a controlled lab to rule out false positives.",
-      "Completed as part of the 14-course IBM Cybersecurity Analyst certificate, covering threat intelligence, SIEM and incident response."
-    ],
-    "architecture": {
-      "recon": "Network topology mapping, service banner grabbing, and port categorization.",
-      "scanning": "OpenVAS NVTs (Network Vulnerability Tests) with credentialed and non-credentialed profiles.",
-      "validation": "Controlled payload staging in isolated subnet sandboxes.",
-      "mitigation": "Patch management prioritization, firewall rules, and cipher suite hardening."
-    },
-    "demoType": "cve-inspector",
-    "securityAngle": "A full assessment cycle in a lab: scan, validate by exploiting, then turn the results into a remediation plan."
-  },
-  {
     "id": "morse-code-x86",
     "title": "Morse Code Converter in Pure x86-64 Assembly",
     "subtitle": "Win32 console program with no C runtime, written in MASM",

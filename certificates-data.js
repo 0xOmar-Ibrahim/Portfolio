@@ -38,6 +38,7 @@ var CERTIFICATES_DATA = [
   },
   {
     id: "educba-embedded-c",
+    hidden: true,
     title: "Embedded Systems using C",
     issuer: "EDUCBA",
     issuerBadge: "educba-badge",

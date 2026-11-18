@@ -3,10 +3,10 @@ import { animate } from '../assets/vendor/motion.subset.min.js';
 import { $, $$, esc, lockPage, reducedMotion } from './util.js';
 import { hasTool, mountTool } from './tools.js';
 
-const SELECTED = ['tryhackme-ctf', 'ordova', 'hexicon', 'ibm-ethical-hacking', 'morse-code-x86'];
+const SELECTED = ['tryhackme-ctf', 'ordova', 'hexicon', 'morse-code-x86'];
 
 // Index order: offensive security and research first.
-const ORDER = ['tryhackme-ctf', 'ordova', 'hexicon', 'ibm-ethical-hacking', 'morse-code-x86', 'keygarden-pass-gen'];
+const ORDER = ['tryhackme-ctf', 'ordova', 'hexicon', 'morse-code-x86', 'keygarden-pass-gen'];
 
 // Nothing folded away any more; the whole set is focused.
 const EARLIER = new Set([]);
@@ -17,7 +17,6 @@ const SELECTED_COVER = {};
 // Lab and CTF work has no real screenshots yet, so these get a typeset cover, not a stock image.
 const TYPE_COVER = {
   'tryhackme-ctf': { lines: ['HTB Skilled', 'THM Top 7%'], note: 'Labs & CTF operations' },
-  'ibm-ethical-hacking': { lines: ['OpenVAS', 'Metasploit'], note: 'IBM capstone', alt: true },
 };
 
 const FILTERS = [
