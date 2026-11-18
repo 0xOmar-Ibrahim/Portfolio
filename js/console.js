@@ -36,9 +36,9 @@ ${g('HAWAII CYBER')}     #9 global, powered by Hack The Box
 ${g('PWN3RX0 (IEEE)')}   #4 solo against teams of 3 to 5
                  ${link('pdfs/IEEE-CTF.pdf', 'certificate')}`,
   skills: () => `${g('LANGUAGES ')} C, Python 3, x86-64 Assembly, SQL, Bash, PowerShell, JavaScript
-${g('OFFENSIVE ')} OWASP Top 10, manual web pentesting, privilege escalation, CVE exploitation
-${g('TOOLS     ')} Metasploit, OpenVAS, Burp Suite, Nmap, Wireshark, Gobuster, IDA Pro, SQLmap
-${g('SYSTEMS   ')} Linux (Kali), Windows &amp; Win32, Docker &amp; gVisor sandboxing, Node.js, Git &amp; GitHub Actions`,
+${g('OFFENSIVE ')} OWASP Top 10, manual web pentesting, privilege escalation, reverse engineering, CVE exploitation
+${g('TOOLS     ')} Metasploit, OpenVAS, Burp Suite, Nmap, Wireshark, Gobuster, SQLmap
+${g('SYSTEMS   ')} Linux (Kali, Parrot), Windows &amp; Win32, Docker &amp; gVisor sandboxing, Git &amp; GitHub Actions`,
   projects: () => window.PROJECTS_DATA.map((p, i) => `${d(String(i + 1).padStart(2, '0'))} ${g(esc(p.id.padEnd(28)))}${esc(p.title)}`).join('\n') + `\n\n${d("Type 'open <id>', e.g. open morse-code-x86")}`,
   findings: () => (window.WRITEUPS_DATA || []).filter((x) => !x.draft).map((x) => `${g(esc(x.id.padEnd(20)))}${esc(x.title)}`).join('\n') + `\n\n${d("Type 'open <id>', e.g. open self-audit")}`,
   exp: () => `${g('Aug 2026 - Sep 2026')}  Penetration Testing &amp; AppSec Trainee, NTI
