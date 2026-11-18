@@ -3,19 +3,16 @@ import { animate } from '../assets/vendor/motion.subset.min.js';
 import { $, $$, esc, lockPage, reducedMotion } from './util.js';
 import { hasTool, mountTool } from './tools.js';
 
-const SELECTED = ['tryhackme-ctf', 'ordova', 'hexicon', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'morse-code-x86', 'esp32-21-relay-controller'];
+const SELECTED = ['tryhackme-ctf', 'ordova', 'hexicon', 'ibm-ethical-hacking', 'morse-code-x86'];
 
-// Index order: security first, then systems with a security angle, then the rest.
-const ORDER = ['tryhackme-ctf', 'ordova', 'hexicon', 'ibm-ethical-hacking', 'smart-elevator-rfid', 'electronics-mgmt-rbac', 'labstar-elevator-control', 'sensor-telemetry-pipeline', 'bank-management-system', 'morse-code-x86', 'keygarden-pass-gen', 'esp32-21-relay-controller', 'voice-smart-home', 'employee-management-c', 'cinema-management-c', 'number-system-converter'];
+// Index order: offensive security and research first.
+const ORDER = ['tryhackme-ctf', 'ordova', 'hexicon', 'ibm-ethical-hacking', 'morse-code-x86', 'keygarden-pass-gen'];
 
-// Earlier work, folded away under the "All" view so the first impression stays on security.
-const EARLIER = new Set(['cinema-management-c', 'number-system-converter']);
+// Nothing folded away any more; the whole set is focused.
+const EARLIER = new Set([]);
 
 // Better first frames than the data file's cover for the gallery.
-const SELECTED_COVER = {
-  'smart-elevator-rfid': 'assets/projs-imgs/DWIN_RFID.png',
-  'esp32-21-relay-controller': 'assets/projs-imgs/PCB-1.jpg',
-};
+const SELECTED_COVER = {};
 
 // Lab and CTF work has no real screenshots yet, so these get a typeset cover, not a stock image.
 const TYPE_COVER = {
@@ -83,7 +80,9 @@ function initFilters() {
   const host = $('#filters');
   const count = (k) => (k === 'all' ? data().length : data().filter((p) => p.affiliation === k).length);
   $('#archive-total').textContent = String(data().length).padStart(2, '0');
-  host.innerHTML = FILTERS.map((f, i) => `<button type="button" class="filter" data-filter="${f.key}" aria-pressed="${i === 0}">${f.label}<small>${count(f.key)}</small></button>`).join('');
+  // Only show a filter that actually has projects (All always shows).
+  const shown = FILTERS.filter((f) => f.key === 'all' || count(f.key) > 0);
+  host.innerHTML = (shown.length > 2 ? shown : []).map((f, i) => `<button type="button" class="filter" data-filter="${f.key}" aria-pressed="${i === 0}">${f.label}<small>${count(f.key)}</small></button>`).join('');
   host.addEventListener('click', (e) => {
     const b = e.target.closest('[data-filter]');
     if (!b) return;
@@ -143,6 +142,9 @@ function caseHTML(p, idx) {
       ${p.audit ? `<h3>What my audit found</h3>
       <div class="audit-note"><p>${esc(p.audit.note)}</p>
         <button type="button" class="link-btn" data-writeup="${esc(p.audit.writeup)}">Read the audit <svg class="ico"><use href="#i-e"/></svg></button></div>` : ''}
+      ${p.defenses?.length ? `<h3>Running strangers' code safely</h3>
+      <p class="case__note">How the sandbox contains untrusted code.</p>
+      <ul class="case__list case__list--shield">${p.defenses.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>` : ''}
       ${hasTool(p) ? `<h3>Try it here</h3><div id="case-tool"></div>` : ''}
       <h3>Highlights</h3>
       <ul class="case__list">${p.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>

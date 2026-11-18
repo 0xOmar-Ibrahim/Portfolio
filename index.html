@@ -6,13 +6,13 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Omar Ibrahim | Penetration Tester &amp; Ethical Hacker</title>
-  <meta name="description" content="Omar Ibrahim is a penetration tester from Giza, Egypt. Found and responsibly disclosed a critical production IDOR exposing PII. Hack The Box Skilled rank, TryHackMe top 7%, 9th globally at Hawaii Cyber CTF. Web app testing, vulnerability assessment, embedded and IoT security, x86-64 and C.">
+  <meta name="description" content="Omar Ibrahim is a penetration tester from Giza, Egypt. Found and responsibly disclosed a critical production IDOR exposing PII. Hack The Box Skilled rank, TryHackMe top 7%, 9th globally at Hawaii Cyber CTF. Web app testing, vulnerability assessment, reverse engineering, and low-level x86-64 and C.">
   <meta name="author" content="Omar Ibrahim">
   <meta name="theme-color" content="#120714">
   <link rel="canonical" href="https://0xomar-ibrahim.github.io/Portfolio/">
 
   <meta property="og:title" content="Omar Ibrahim | Penetration Tester &amp; Ethical Hacker">
-  <meta property="og:description" content="Offensive security from the browser down to the firmware. HTB Skilled, THM top 7%, 9th globally at Hawaii Cyber CTF.">
+  <meta property="og:description" content="Offensive security from the browser down to the bytes. HTB Skilled, THM top 7%, 9th globally at Hawaii Cyber CTF.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://0xomar-ibrahim.github.io/Portfolio/">
   <meta property="og:image" content="https://0xomar-ibrahim.github.io/Portfolio/assets/og.jpg">
@@ -27,18 +27,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,300..900&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&family=Martian+Mono:wdth,wght@75..112.5,300..600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3.1">
+  <link rel="stylesheet" href="style.css?v=3.2">
   <link rel="icon" href="assets/images/ico.png" sizes="any">
 
-  <script src="js/boot.js?v=3.1"></script>
+  <script src="js/boot.js?v=3.2"></script>
   <script src="assets/vendor/gsap.min.js" defer></script>
   <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
   <script src="assets/vendor/SplitText.min.js" defer></script>
   <script src="assets/vendor/lenis.min.js" defer></script>
-  <script src="projects-data.js?v=3.1" defer></script>
-  <script src="certificates-data.js?v=3.1" defer></script>
-  <script src="writeups-data.js?v=3.1" defer></script>
-  <script type="module" src="js/main.js?v=3.1"></script>
+  <script src="projects-data.js?v=3.2" defer></script>
+  <script src="certificates-data.js?v=3.2" defer></script>
+  <script src="writeups-data.js?v=3.2" defer></script>
+  <script type="module" src="js/main.js?v=3.2"></script>
 </head>
 
 <body>
@@ -120,7 +120,7 @@
       <div class="hero__foot">
         <div class="hero__pitch" data-hero-rise>
           <p class="mono hero__role">Penetration Tester &amp; Ethical Hacker</p>
-          <p class="hero__lede">I test systems the way attackers read them: from web requests and network services down to firmware, registers and assembly.</p>
+          <p class="hero__lede">I test systems the way attackers read them: from web requests and network services down to registers and assembly.</p>
           <div class="hero__cta">
             <a class="btn btn--gold" href="#work"><span>See the work</span><svg class="ico"><use href="#i-e"/></svg></a>
             <button class="btn btn--line" type="button" data-console><svg class="ico"><use href="#i-term"/></svg><span>Open the console</span></button>
@@ -154,16 +154,15 @@
             <p>I'm an IT student and aspiring penetration tester, with hundreds of hours on <strong>Hack The Box</strong> (Skilled rank, Level 33, 14,310 XP), <strong>TryHackMe</strong> (top 7%) and the <strong>PortSwigger Web Security Academy</strong>.</p>
             <p>I found and responsibly disclosed a critical <strong>IDOR on a live production website</strong> that exposed national IDs, names and photos, and I recently audited my own older code the same way.</p>
             <p>My method covers the full lifecycle: reconnaissance, web enumeration, vulnerability validation, CVE analysis with tools like Metasploit and OpenVAS, then remediation advice a team can act on.</p>
-            <p>Alongside security, I shipped embedded and IoT systems at LABstar and wrote low-level software in C and x86-64 assembly. That background goes with me into every engagement.</p>
+            <p>I also build security tooling and write low-level software in C and x86-64 assembly, which feeds my reverse-engineering work and the way I read a target from the bytes up.</p>
           </div>
         </div>
       </div>
 
-      <ol class="stack" aria-label="Areas of focus, from application down to hardware">
-        <li data-reveal><span class="stack__l mono">L4</span><h3>Web application penetration testing</h3><p>OWASP Top 10 exploitation, authentication bypasses, IDOR, SSRF, injection vectors and manual Burp Suite audits.</p></li>
-        <li data-reveal><span class="stack__l mono">L3</span><h3>Network recon and vulnerability audit</h3><p>Active service mapping, OpenVAS NVTs, CVE verification with Metasploit and packet analysis in Wireshark.</p></li>
-        <li data-reveal><span class="stack__l mono">L2</span><h3>Embedded and IoT hardware security</h3><p>RFID access control validation, ESP32 and ESP8266 Wi-Fi firmware hardening, PCB design and serial bus protection.</p></li>
-        <li data-reveal><span class="stack__l mono">L1</span><h3>Low-level and reverse engineering</h3><p>x86-64 assembly, memory layout, binary file parsing in C and Python automation for security pipelines.</p></li>
+      <ol class="stack" aria-label="Areas of focus, from the application layer down to the bytes">
+        <li data-reveal><span class="stack__l mono">L3</span><h3>Web application penetration testing</h3><p>OWASP Top 10 exploitation, authentication bypasses, IDOR, SSRF, injection vectors and manual Burp Suite audits.</p></li>
+        <li data-reveal><span class="stack__l mono">L2</span><h3>Network recon and vulnerability audit</h3><p>Active service mapping, OpenVAS NVTs, CVE verification with Metasploit and packet analysis in Wireshark.</p></li>
+        <li data-reveal><span class="stack__l mono">L1</span><h3>Low-level and reverse engineering</h3><p>x86-64 assembly, memory layout, binary file parsing in C and Python automation for security tooling.</p></li>
       </ol>
     </section>
 
@@ -233,7 +232,7 @@
             <h3>3rd Nationally in Egypt</h3>
             <p class="mono score__org">Embedded Systems &amp; AI &middot; MICA &middot; Jun 2025</p>
             <p>Ranked <strong>3rd nationally across Egypt</strong> for Embedded Systems and Artificial Intelligence engineering.</p>
-            <ul class="tags"><li>Embedded C</li><li>AI</li><li>PCB Design</li></ul>
+            <ul class="tags"><li>Low-level C</li><li>AI</li><li>Systems</li></ul>
           </div>
         </article>
       </div>
@@ -256,7 +255,7 @@
         <header class="chead chead--work">
           <span class="addr">0x40</span>
           <h2 data-split>Work</h2>
-          <p class="chead__note">Security research, production embedded systems and tools built from scratch.</p>
+          <p class="chead__note">Security tooling, research and reverse engineering, built from scratch.</p>
         </header>
         <div class="selected__track" id="selected-track"></div>
       </div>
@@ -276,7 +275,7 @@
       <header class="chead">
         <span class="addr">0x50</span>
         <h2 data-split>Record</h2>
-        <p class="chead__note">Independent research, security training and production engineering.</p>
+        <p class="chead__note">Independent offensive-security research and training.</p>
       </header>
 
       <div class="timeline" id="timeline">
@@ -301,21 +300,6 @@
 
         <article class="job">
           <span class="via" aria-hidden="true"></span>
-          <p class="mono job__date">Oct 2025 &ndash; Nov 2025</p>
-          <div class="job__main">
-            <p class="mono job__kind">Software internship</p>
-            <h3>Python Developer Intern</h3>
-            <p class="job__org">CodeAlpha &middot; Remote / India</p>
-            <ul class="job__list">
-              <li><strong>Security automation scripting.</strong> Enhanced Python automation scripts using OS, Shutil and Regex modules, strengthening security tooling and workflow automation.</li>
-              <li><strong>Logic and error handling.</strong> Expanded logic-driven applications using advanced data structures, modular design and robust error handling.</li>
-            </ul>
-            <ul class="tags"><li>Python 3</li><li>Regex</li><li>Workflow Automation</li><li>OS &amp; Shutil</li><li>Security Scripting</li></ul>
-          </div>
-        </article>
-
-        <article class="job">
-          <span class="via" aria-hidden="true"></span>
           <p class="mono job__date">Feb 2025</p>
           <div class="job__main">
             <p class="mono job__kind">Independent research</p>
@@ -329,22 +313,6 @@
           </div>
         </article>
 
-        <article class="job">
-          <span class="via" aria-hidden="true"></span>
-          <p class="mono job__date">Aug 2023 &ndash; Jun 2025</p>
-          <div class="job__main">
-            <p class="mono job__kind">Work experience</p>
-            <h3>Embedded Software Developer</h3>
-            <p class="job__org">LABstar &middot; Cairo, Egypt</p>
-            <ul class="job__list">
-              <li><strong>Role-based access control.</strong> Enforced strict RBAC across multi-user industrial applications, ensuring data integrity and least privilege.</li>
-              <li><strong>RFID hardware authentication.</strong> Implemented RFID authentication for time-limited floor access on elevator systems, overseeing secure hardware-to-board communication and user authorization.</li>
-              <li><strong>Cross-platform IoT controller.</strong> Created an IoT controller (Flutter and ESP32 over Wi-Fi) with real-time hardware synchronization and low-latency command execution.</li>
-              <li><strong>Database security and audits.</strong> Developed inventory and sales systems with SQL backends and automated audit trails to prevent data tampering.</li>
-            </ul>
-            <ul class="tags"><li>Embedded C</li><li>RFID Security</li><li>ESP32 Wi-Fi</li><li>Flutter</li><li>RBAC</li><li>SQL Audit Trails</li></ul>
-          </div>
-        </article>
       </div>
     </section>
 
@@ -357,7 +325,7 @@
 
       <div class="ticker" aria-hidden="true">
         <p data-drift="-1">Burp Suite &nbsp;/&nbsp; Metasploit &nbsp;/&nbsp; Nmap &nbsp;/&nbsp; OpenVAS &nbsp;/&nbsp; Wireshark &nbsp;/&nbsp; SQLmap &nbsp;/&nbsp; Gobuster &nbsp;/&nbsp; IDA Pro &nbsp;/&nbsp; Nessus &nbsp;/&nbsp;</p>
-        <p data-drift="1" class="ticker__alt">C &nbsp;/&nbsp; Python &nbsp;/&nbsp; x86-64 &nbsp;/&nbsp; Bash &nbsp;/&nbsp; SQL &nbsp;/&nbsp; PowerShell &nbsp;/&nbsp; ESP32 &nbsp;/&nbsp; PCB &nbsp;/&nbsp; Kali &nbsp;/&nbsp; Win32 &nbsp;/&nbsp;</p>
+        <p data-drift="1" class="ticker__alt">C &nbsp;/&nbsp; Python &nbsp;/&nbsp; x86-64 &nbsp;/&nbsp; Bash &nbsp;/&nbsp; SQL &nbsp;/&nbsp; PowerShell &nbsp;/&nbsp; Node.js &nbsp;/&nbsp; gVisor &nbsp;/&nbsp; Kali &nbsp;/&nbsp; Win32 &nbsp;/&nbsp;</p>
       </div>
 
       <div class="regs">
@@ -400,15 +368,14 @@
           </dl>
         </div>
         <div class="reg" data-reveal>
-          <h3>Hardware, IoT and cloud</h3>
+          <h3>Systems, tooling and platforms</h3>
           <dl>
             <div><dt>Linux (Kali, Ubuntu)</dt><dd>Daily driver</dd></div>
             <div><dt>Windows &amp; Win32 API</dt><dd>Advanced</dd></div>
-            <div><dt>ESP32 / ESP8266</dt><dd>IoT hardware</dd></div>
-            <div><dt>Custom PCB design</dt><dd>Hardware</dd></div>
-            <div><dt>Flutter / Dart</dt><dd>Mobile UI</dd></div>
-            <div><dt>Firebase Realtime DB</dt><dd>Cloud</dd></div>
-            <div><dt>Git &amp; GitHub</dt><dd>CI / version control</dd></div>
+            <div><dt>Docker &amp; gVisor</dt><dd>Sandboxing</dd></div>
+            <div><dt>Node.js</dt><dd>Security tooling</dd></div>
+            <div><dt>REST APIs</dt><dd>Design &amp; testing</dd></div>
+            <div><dt>Git &amp; GitHub Actions</dt><dd>CI / version control</dd></div>
           </dl>
         </div>
       </div>
@@ -431,48 +398,22 @@
       <header class="chead">
         <span class="addr">0x80</span>
         <h2 data-split>Training</h2>
-        <p class="chead__note">Education and technical leadership.</p>
+        <p class="chead__note">Academic background.</p>
       </header>
 
       <div class="training__grid">
-        <div>
-          <h3 class="col-title mono">Education</h3>
-          <article class="entry" data-reveal>
-            <p class="mono entry__when">Expected 2029</p>
-            <h4>Bachelor's degree, Information Technology</h4>
-            <p class="entry__org">New Cairo Technological University (NCTU) &middot; Cairo</p>
-            <p>Enterprise IT systems, advanced networking, distributed infrastructure, operating system internals and modern application security.</p>
-          </article>
-          <article class="entry" data-reveal>
-            <p class="mono entry__when">Graduated Jun 2025</p>
-            <h4>High School Diploma, Embedded Systems &amp; AI</h4>
-            <p class="entry__org">Misr International Computer &amp; AI Academy (MICA) &middot; Giza</p>
-            <p>Low-level embedded C, microcontrollers (AVR, ESP32), artificial intelligence fundamentals, PCB design and hardware-software interfacing.</p>
-          </article>
-        </div>
-        <div>
-          <h3 class="col-title mono">Leadership</h3>
-          <article class="entry" data-reveal>
-            <p class="mono entry__when">2025 &middot; MICA</p>
-            <h4>Technical Project Lead, Graduation Project</h4>
-            <p class="entry__org">Voice-controlled smart home with custom PCB</p>
-            <ul>
-              <li>Directed a multidisciplinary team building a smart home ecosystem on Flutter, Firebase and ESP8266.</li>
-              <li>Managed sprint milestones, task distribution, hardware-to-cloud integration and engineering documentation.</li>
-              <li>Led custom PCB schematic layout, optocoupler relay isolation and safety certifications.</li>
-            </ul>
-          </article>
-          <article class="entry" data-reveal>
-            <p class="mono entry__when">2025 &middot; MICA</p>
-            <h4>Technical Coordinator, RoboCup</h4>
-            <p class="entry__org">Line Follower robotics division</p>
-            <ul>
-              <li>Led the category, overseeing technical pre-flight inspections and rule compliance for competing teams.</li>
-              <li>Mentored students on IR sensor array calibration, PID control and embedded logic optimization.</li>
-              <li>Resolved live hardware disputes and validated timing gate accuracy under competition conditions.</li>
-            </ul>
-          </article>
-        </div>
+        <article class="entry" data-reveal>
+          <p class="mono entry__when">Expected 2029</p>
+          <h4>Bachelor's degree, Information Technology</h4>
+          <p class="entry__org">New Cairo Technological University (NCTU) &middot; Cairo</p>
+          <p>Enterprise IT systems, advanced networking, distributed infrastructure, operating system internals and modern application security.</p>
+        </article>
+        <article class="entry" data-reveal>
+          <p class="mono entry__when">Graduated Jun 2025</p>
+          <h4>High School Diploma, Embedded Systems &amp; AI</h4>
+          <p class="entry__org">Misr International Computer &amp; AI Academy (MICA) &middot; Giza</p>
+          <p>Low-level C, computer architecture, systems programming and artificial intelligence fundamentals &mdash; graduated 3rd nationally in Egypt.</p>
+        </article>
       </div>
     </section>
 
