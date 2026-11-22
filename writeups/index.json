@@ -1,6 +1,25 @@
 {
   "items": [
     {
+      "slug": "thm-startup-walkthrough",
+      "file": "THM Startup Walkthrough.md",
+      "title": "TryHackMe: Startup",
+      "date": "2026-11-22",
+      "type": "TryHackMe room",
+      "summary": "An easy Linux box. Anonymous, writable FTP that is also served over HTTP gives a web shell; a forgotten packet capture leaks an SSH password; and a world-writable scheduled script hands over root.",
+      "autoSummary": false,
+      "tags": [
+        "Linux",
+        "FTP",
+        "Reverse Shell",
+        "PCAP",
+        "Privilege Escalation",
+        "Cron"
+      ],
+      "draft": false,
+      "minutes": 2
+    },
+    {
       "slug": "htb-reactoops-walkthrough",
       "file": "HTB ReactOOPS Walkthrough.md",
       "title": "ReactOOPS",
