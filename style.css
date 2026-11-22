@@ -266,6 +266,8 @@ strong { font-weight: 600; color: var(--fg); }
 @media (hover: none) { .prose__copy { opacity: 1; } .prose pre { padding-top: 2.7rem; } }
 .prose__copy:hover { color: var(--enig); border-color: var(--enig); }
 .prose img { max-width: 100%; height: auto; border: 1px solid var(--line); }
+.prose .spoiler { filter: blur(6px); transition: filter .18s; cursor: help; padding: 0 .35em; background: var(--mask-950); border-radius: 3px; font-family: var(--mono); font-size: .9em; }
+.prose .spoiler:hover, .prose .spoiler:focus { filter: none; }
 .prose hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
 .prose__table { overflow-x: auto; }
 .prose table { border-collapse: collapse; width: 100%; font-size: .92rem; }

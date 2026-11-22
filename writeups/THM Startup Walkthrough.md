@@ -121,6 +121,8 @@ ssh lennie@$IP
 cat user.txt
 ```
 
+That prints the user flag &mdash; blurred here, go capture your own: <span class="spoiler">THM{redacted}</span>
+
 `~/Documents` holds more flavour text. One note is telling: *"delete incident logs"* — they
 knew about the capture and never cleaned it up.
 
@@ -149,6 +151,8 @@ When cron runs `planner.sh`, the listener gets a shell as **root**:
 ```bash
 cat /root/root.txt
 ```
+
+And there's the root flag, blurred the same way: <span class="spoiler">THM{redacted}</span>
 
 ## How to fix it
 
