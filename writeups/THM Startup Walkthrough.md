@@ -88,13 +88,16 @@ Now visit `http://$IP/files/ftp/php-reverse-shell.php` — the listener catches 
 
 ## Looting: a packet capture leaks a password
 
-Enumerating from `/`:
+Enumerating from `/` turns up two files that matter:
 
 ```bash
-ls -la /
-# recipe.txt  (more flavour text)
-# incidents/  -> suspicious.pcapng
+cat recipe.txt      # flavour text that hides a room answer
+ls -la /incidents   # suspicious.pcapng
 ```
+
+`recipe.txt` quietly answers one of the room's questions &mdash; *what is the secret spicy
+soup recipe?* <span class="spoiler">love</span>. The packet capture in `incidents/` is the
+real prize.
 
 There's no easy way to read the `.pcapng` in a dumb shell, so base64 it out:
 
